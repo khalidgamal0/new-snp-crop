@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import '../services/api_service.dart';
 
 // Usage Example
@@ -30,7 +32,7 @@ class BaseRepoImpl<T> implements BaseRepo<T> {
     T? model;
     var result = await ApiService.callService(
         actionType: actionType, apiName: apiName, body: body);
-    result.fold((failure) => print(failure.msg + failure.status.toString()),
+    result.fold((failure) => log(failure.msg + failure.status.toString()),
         (success) {
       model = parser(success.data);
     });
