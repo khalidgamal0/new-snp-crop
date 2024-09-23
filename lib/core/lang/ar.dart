@@ -4,7 +4,7 @@ import '../utils/app_words.dart';
 //   AppWords.appName.name: 'الذكاء الاصطناعي',
 // };
 Map<AppWords, String> ar = {
-  AppWords.appName: 'الذكاء الاصطناعي',
+  AppWords.appName: 'SNB eCrop',
   AppWords.ok: 'حسناً',
   AppWords.cancel: 'إلغاء',
 };

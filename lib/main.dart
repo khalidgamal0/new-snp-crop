@@ -13,28 +13,18 @@ Future<void> main() async {
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   await SharedPreference.init();
-  RouteObserver() = MyRouteObserver();
-  Locale currentLocale = await Lang.getDefaultOrStoredLocal();
+  // Locale currentLocale = await Lang.getDefaultOrStoredLocal();
 
-  SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(
-        systemNavigationBarColor: Colors.white, // navigation bar color
-        statusBarIconBrightness: Brightness.dark, //icon color in android
-        statusBarBrightness: Brightness.dark, //icon color in ios
-        statusBarColor: Colors.transparent,
-        systemNavigationBarDividerColor: Colors.white),
-  );
-
-  //sentry
-  // await SentryFlutter.init(
-  //   (options) {
-  //     options.dsn =
-  //         'https://27b7386e8f599057faf55a208753a08e@o4507129166888960.ingest.us.sentry.io/4507662654111744';
-  //   },
-  //   appRunner: () => runApp(MyApp(currentLocale: currentLocale)),
+  // SystemChrome.setSystemUIOverlayStyle(
+  //   const SystemUiOverlayStyle(
+  //       systemNavigationBarColor: Colors.white, // navigation bar color
+  //       statusBarIconBrightness: Brightness.dark, //icon color in android
+  //       statusBarBrightness: Brightness.dark, //icon color in ios
+  //       statusBarColor: Colors.transparent,
+  //       systemNavigationBarDividerColor: Colors.white),
   // );
 
-  runApp(MyApp(
-    currentLocale: currentLocale,
+  runApp(const MyApp(
+    currentLocale: Locale('ar'),
   ));
 }

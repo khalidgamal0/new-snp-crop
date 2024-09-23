@@ -1,5 +1,5 @@
 class AppKeys {
-  static const String fontFamily = 'Typography Times';
+  static const String fontFamily = 'Roboto';
   static const String languageCode = 'language_code';
   static const String countryCode = 'countryCode';
   static const String onBoard = 'onBoard';

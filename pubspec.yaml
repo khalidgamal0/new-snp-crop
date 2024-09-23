@@ -18,17 +18,17 @@ dependencies:
   crypto: ^3.0.3
   get: ^4.6.6
   flutter_localizations:
-      sdk: flutter
+    sdk: flutter
   shared_preferences: ^2.2.3
   pin_code_text_field: ^1.8.0
   equatable: ^2.0.5
   flutter_bloc: ^8.1.5
   dartz: ^0.10.1
-    # flutter_html: ^3.0.0-beta.2
+  # flutter_html: ^3.0.0-beta.2
   internet_connection_checker: ^2.0.0
-#  file_picker: ^8.0.6
-#  url_launcher: ^6.3.0
-#  sentry_flutter: ^8.5.0
+  #  file_picker: ^8.0.6
+  #  url_launcher: ^6.3.0
+  #  sentry_flutter: ^8.5.0
   flutter_native_splash: ^2.3.13
 
 
@@ -50,20 +50,38 @@ flutter:
     - assets/images/
 
   # example:
+
+#  FontWeight.w100: Thin
+#  FontWeight.w200: Extra Light (Ultra Light)
+#  FontWeight.w300: Light
+#  FontWeight.w400: Normal (Regular)
+#  FontWeight.w500: Medium
+#  FontWeight.w600: Semi Bold (Demi Bold)
+#  FontWeight.w700: Bold
+#  FontWeight.w800: Extra Bold (Ultra Bold)
+#  FontWeight.w900: Black (Heavy)
+
   fonts:
-    - family: Typography Times
+    - family: Roboto
       fonts:
-        - asset: assets/fonts/typogarphy/Typography Times Bold.ttf
-        - asset: assets/fonts/typogarphy/Typography Times Bold Italic.ttf
-        - asset: assets/fonts/typogarphy/Typography Times Italic.ttf
-        - asset: assets/fonts/typogarphy/Typography Times Regular.ttf
+        - asset: assets/fonts/roboto/Roboto-Black.ttf
+        - asset: assets/fonts/roboto/Roboto-BlackItalic.ttf
+        - asset: assets/fonts/roboto/Roboto-Bold.ttf
+        - asset: assets/fonts/roboto/Roboto-BoldItalic.ttf
+        - asset: assets/fonts/roboto/Roboto-Italic.ttf
+        - asset: assets/fonts/roboto/Roboto-Light.ttf
+        - asset: assets/fonts/roboto/Roboto-LightItalic.ttf
+        - asset: assets/fonts/roboto/Roboto-Medium.ttf
+        - asset: assets/fonts/roboto/Roboto-MediumItalic.ttf
+        - asset: assets/fonts/roboto/Roboto-Regular.ttf
+        - asset: assets/fonts/roboto/Roboto-Thin.ttf
+        - asset: assets/fonts/roboto/Roboto-ThinItalic.ttf
 
   #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
+    - family: Typography
+      fonts:
+        - asset: assets/fonts/typogarphy/Typography Times Regular.ttf
+  #
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
