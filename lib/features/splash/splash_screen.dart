@@ -14,7 +14,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     // TODO: implement initState
-    Future.delayed(const Duration( seconds: 1)).then((val){
+    Future.delayed(const Duration( seconds: 3)).then((val){
       goToWidget(screen:  LoginScreen());
     });
     super.initState();
