@@ -4,14 +4,11 @@ flutter_native_splash:
   web: false
 
   color: "#034537"
-  image: 'assets/images/Image21.png'
+  image: 'assets/images/splah-icon.png'
 
   color_dark: "#034537"
-#  image_dark: 'assets/images/Image21.png'
+  image_dark: 'assets/images/splah-icon.png'
 
   android_12:
-    color: "#F2F2F2"
-#    image: 'assets/images/Image21.png'
-
-
-
+    color: "#034537"
+    image: 'assets/images/splah-icon.png'

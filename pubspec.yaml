@@ -8,7 +8,6 @@ version: 1.0.0+1
 environment:
   sdk: '>=3.4.3 <4.0.0'
 
-
 dependencies:
   flutter:
     sdk: flutter
@@ -24,64 +23,62 @@ dependencies:
   equatable: ^2.0.5
   flutter_bloc: ^8.1.5
   dartz: ^0.10.1
-  # flutter_html: ^3.0.0-beta.2
   internet_connection_checker: ^2.0.0
-  #  file_picker: ^8.0.6
-  #  url_launcher: ^6.3.0
-  #  sentry_flutter: ^8.5.0
   flutter_native_splash: ^2.3.13
-
-
-
   cupertino_icons: ^1.0.6
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
   flutter_lints: ^4.0.0
 
 flutter:
 
   uses-material-design: true
 
-  # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
-
-  # example:
-
-#  FontWeight.w100: Thin
-#  FontWeight.w200: Extra Light (Ultra Light)
-#  FontWeight.w300: Light
-#  FontWeight.w400: Normal (Regular)
-#  FontWeight.w500: Medium
-#  FontWeight.w600: Semi Bold (Demi Bold)
-#  FontWeight.w700: Bold
-#  FontWeight.w800: Extra Bold (Ultra Bold)
-#  FontWeight.w900: Black (Heavy)
+    - assets/fonts/roboto/
+    - assets/fonts/typogarphy/
+    - assets/fonts/Lintel-Reg-Ital/
 
   fonts:
     - family: Roboto
       fonts:
         - asset: assets/fonts/roboto/Roboto-Black.ttf
+          weight: 900
         - asset: assets/fonts/roboto/Roboto-BlackItalic.ttf
+          weight: 900
+          style: italic
         - asset: assets/fonts/roboto/Roboto-Bold.ttf
+          weight: 700
         - asset: assets/fonts/roboto/Roboto-BoldItalic.ttf
+          weight: 700
+          style: italic
         - asset: assets/fonts/roboto/Roboto-Italic.ttf
+          style: italic
         - asset: assets/fonts/roboto/Roboto-Light.ttf
+          weight: 300
         - asset: assets/fonts/roboto/Roboto-LightItalic.ttf
+          weight: 300
+          style: italic
         - asset: assets/fonts/roboto/Roboto-Medium.ttf
+          weight: 500
         - asset: assets/fonts/roboto/Roboto-MediumItalic.ttf
+          weight: 500
+          style: italic
         - asset: assets/fonts/roboto/Roboto-Regular.ttf
+          weight: 400
         - asset: assets/fonts/roboto/Roboto-Thin.ttf
+          weight: 100
         - asset: assets/fonts/roboto/Roboto-ThinItalic.ttf
+          weight: 100
+          style: italic
 
-  #         style: italic
     - family: Typography
       fonts:
         - asset: assets/fonts/typogarphy/Typography Times Regular.ttf
-  #
-  #
-  # For details regarding fonts from package dependencies,
-  # see https://flutter.dev/custom-fonts/#from-packages
+    - family: Lintel
+      fonts:
+        - asset: assets/fonts/Lintel-Reg-Ital/Lintel-Italic.ttf
+        - asset: assets/fonts/Lintel-Reg-Ital/Lintel-Regular.ttf

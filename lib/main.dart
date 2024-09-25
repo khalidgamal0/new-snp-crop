@@ -2,8 +2,6 @@ import 'package:artificial_intelligence/my_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'core/helper/lang.dart';
-import 'core/routes/route_observer.dart';
 import 'core/services/local_storage_services.dart';
 
 Future<void> main() async {

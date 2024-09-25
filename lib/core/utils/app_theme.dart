@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../helper/app_keys.dart';
-
 ThemeData appLightTheme() {
   return ThemeData(
-    fontFamily: AppKeys.fontFamily,
+    // fontFamily: AppKeys.fontFamily,
     scaffoldBackgroundColor: Colors.white,
     // primaryColor: AppColors.primary,
     // // hintColor: AppColors.secondary,
