@@ -13,26 +13,25 @@ FontWeight.w700: Bold
 FontWeight.w800: Extra Bold (Ultra Bold)
 FontWeight.w900: Black (Heavy)
 */
-  static final TextStyle textStyle10 =  TextStyle(
+  static final TextStyle textStyle10 = TextStyle(
       fontSize: 10.sp,
       color: const Color(0XFFFEFEFE),
       fontWeight: FontWeight.w400);
-  static final TextStyle textStyle12 =  TextStyle(
-      fontSize: 12.sp,
-      color: Colors.black,
-      fontWeight: FontWeight.w400);
-  static final TextStyle textStyle14 =  TextStyle(
-      fontSize: 14.sp,
-      color: Colors.white,
-      fontWeight: FontWeight.w500);
-  static final TextStyle textStyle16 =  TextStyle(
-      fontSize: 16.sp,
+  static final TextStyle textStyle12 = TextStyle(
+      fontSize: 12.sp, color: Colors.black, fontWeight: FontWeight.w400);
+  static final TextStyle textStyle14 = TextStyle(
+      fontSize: 14.sp, color: Colors.white, fontWeight: FontWeight.w500);
+  static final TextStyle textStyle16 = TextStyle(
+      fontSize: 16.sp, color: Colors.white, fontWeight: FontWeight.w500);
+  static final TextStyle textStyle18 = TextStyle(
+      fontFamily: 'Typography',
+      fontSize: 18.sp,
       color: Colors.white,
       fontWeight: FontWeight.w500);
 
-  static final TextStyle textStyle22 =  TextStyle(
-      fontFamily: 'Typography',
-      fontSize: 22.sp,
-      color: Colors.white,
-      fontWeight: FontWeight.w500);
+  static final TextStyle textStyle22 = TextStyle(
+      fontSize: 22.sp, color: Colors.white, fontWeight: FontWeight.w500);
+
+  static final TextStyle textStyleLintel = TextStyle(
+      fontSize: 14.sp, fontFamily: 'Lintel', fontStyle: FontStyle.italic);
 }
