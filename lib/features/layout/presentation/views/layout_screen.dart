@@ -5,16 +5,30 @@ import 'package:artificial_intelligence/core/utils/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/presentation/screens/drawer_screen.dart';
 import 'widgets/main_home_widget.dart';
 
-class LayoutScreen extends StatelessWidget {
+class LayoutScreen extends StatefulWidget {
   const LayoutScreen({super.key});
 
   @override
+  State<LayoutScreen> createState() => _LayoutScreenState();
+}
+
+final GlobalKey<ScaffoldState> drawerKey = GlobalKey();
+
+class _LayoutScreenState extends State<LayoutScreen> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: drawerKey,
+      drawer: const DrawerScreen(),
       appBar: AppBar(
-        leading: Image.asset(AppImages.drawerIcon),
+        leading: GestureDetector(
+            onTap: () {
+              drawerKey.currentState!.openDrawer();
+            },
+            child: Image.asset(AppImages.drawerIcon)),
         title: Text(
           'الصفحة الرئيسية ',
           style: AppTextStyles.textStyle16,
@@ -41,36 +55,42 @@ class LayoutScreen extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 42.h),
               child: Column(
                 children: [
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      MainHomeWidget(
+                      const MainHomeWidget(
                         image: AppImages.mailIcon,
-                        title: 'سداد',
+                        title: '       سداد      ',
                       ),
-                      MainHomeWidget(
+                      horizontalSpacer(30),
+                      const MainHomeWidget(
                         image: AppImages.transferIcon,
                         title: 'التحويلات',
                       ),
-                      MainHomeWidget(
-                        image: AppImages.accountPersonIcon,
-                        title: 'الحسابات',
+                      horizontalSpacer(30),
+                      GestureDetector(
+                        onTap: () {},
+                        child: const MainHomeWidget(
+                          image: AppImages.accountPersonIcon,
+                          title: 'الحسابات',
+                        ),
                       ),
                     ],
                   ),
                   verticalSpacer(27),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  Row(
                     children: [
-                      MainHomeWidget(
+                      const MainHomeWidget(
                         image: AppImages.tradeIcon,
                         title: 'التجارة الإلكترونية ',
                       ),
-                      MainHomeWidget(
+                      horizontalSpacer(30),
+                      const MainHomeWidget(
                         image: AppImages.fireiCON,
-                        title: 'أرامكو',
+                        title: '      أرامكو       ',
                       ),
-                      MainHomeWidget(
+                      horizontalSpacer(30),
+                      const MainHomeWidget(
                         image: AppImages.walletIcon,
                         title: 'بطاقات الشركات',
                       ),
@@ -80,8 +100,9 @@ class LayoutScreen extends StatelessWidget {
                   const Align(
                     alignment: Alignment.topRight,
                     child: MainHomeWidget(
+                      textAlign: TextAlign.center,
                       image: AppImages.profileIcon,
-                      title: 'بطاقات الشركات',
+                      title: 'إعدادات \nالملف الشخصي ',
                     ),
                   ),
                 ],
@@ -90,7 +111,20 @@ class LayoutScreen extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: Image.asset(AppImages.homeBottomNav),
+      bottomNavigationBar: Stack(
+        children: [
+          Image.asset(AppImages.homeBottomNav),
+          GestureDetector(
+            onTap: (){
+
+            },
+            child: const SizedBox(
+              width: 70,
+              height: 75,
+            ),
+          )
+        ],
+      ),
     );
   }
 }

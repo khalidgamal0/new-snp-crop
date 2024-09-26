@@ -27,4 +27,12 @@ abstract class AppImages {
   static const String walletIcon = '${_imagePath}wallet-icon.png';
   static const String mailIcon = '${_imagePath}mail-icon.png';
   static const String profileIcon = '${_imagePath}profile-icon.png';
+  static const String snpLogo = '${_imagePath}snp-logo.png';
+  static const String drawerContainerImage = '${_imagePath}drawer-container-image.png';
+
+  static const String clockIcon = '${_imagePath}clock-icon.png';
+  static const String accountSettingIcon = '${_imagePath}account-stting.png';
+  static const String notificationIcon = '${_imagePath}notification.png';
+  static const String langIcon = '${_imagePath}lan-image.png';
+  static const String homeIcon = '${_imagePath}home-icon.png';
 }
