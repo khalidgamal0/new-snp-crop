@@ -5,18 +5,27 @@ import 'package:flutter/material.dart';
 
 class MainHomeWidget extends StatelessWidget {
   const MainHomeWidget({
-    super.key,required this.image,required this.title,
+    super.key,
+    required this.image,
+    required this.title,
+    this.crossAxisAlignment,
+    this.textAlign,
   });
 
-final String image,title;
+  final CrossAxisAlignment? crossAxisAlignment;
+  final TextAlign? textAlign;
+  final String image, title;
+
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: crossAxisAlignment ?? CrossAxisAlignment.center,
       children: [
         Image.asset(image),
         verticalSpacer(4),
         Text(
           title,
+          textAlign: textAlign ?? TextAlign.start,
           style: AppTextStyles.textStyle14.copyWith(
             color: const Color(0xffFEFEFE),
           ),
