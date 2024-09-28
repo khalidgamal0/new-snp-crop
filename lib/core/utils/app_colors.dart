@@ -10,6 +10,7 @@ abstract class AppColors {
   static final Color color0C7D64 = HexColor("#0C7D64");
   static final Color color6A5555 = HexColor("#6A5555");
   static final Color color514F4F = HexColor("#514F4F");
+  static final Color borderColor = HexColor("#ECCFCF");
 
 
 

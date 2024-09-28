@@ -13,7 +13,7 @@ class CustomTextFormField extends StatelessWidget {
       this.nextFocusNode,
       this.hintStyle,
       this.controller,
-      this.onFieldSubmitted, this.onChanged});
+      this.onFieldSubmitted, this.onChanged, this.textInputType});
   final String? prefixIcon;
   final String? hintText;
   final String? Function(String?)? validator;
@@ -22,6 +22,7 @@ class CustomTextFormField extends StatelessWidget {
   final void Function(String)? onFieldSubmitted;
   final Function(String)? onChanged;
   final TextStyle? hintStyle;
+  final TextInputType ?textInputType;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -36,6 +37,7 @@ class CustomTextFormField extends StatelessWidget {
           fontWeight: FontWeight.w400,
           fontStyle: FontStyle.italic,
         ),
+        keyboardType:textInputType ,
         validator: validator,
         onChanged: onChanged,
         autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -43,7 +45,7 @@ class CustomTextFormField extends StatelessWidget {
         textInputAction: currentFocusNode == nextFocusNode
             ? TextInputAction.done
             : TextInputAction.next,
-            
+
         onFieldSubmitted: onFieldSubmitted ??
             (text) {
               if (currentFocusNode == nextFocusNode) {
@@ -55,7 +57,9 @@ class CustomTextFormField extends StatelessWidget {
             },
         focusNode: currentFocusNode,
         decoration: InputDecoration(
+
           hintText: hintText,
+
           errorMaxLines: 1,
           hintStyle: hintStyle ??
               TextStyle(

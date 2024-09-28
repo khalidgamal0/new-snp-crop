@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/presentation/screens/drawer_screen.dart';
+import '../../../../core/routes/app_navigators.dart';
+import '../../../account_summary/presentation/views/account_summary_screen.dart';
 import 'widgets/main_home_widget.dart';
 
 class LayoutScreen extends StatefulWidget {
@@ -55,42 +57,42 @@ class _LayoutScreenState extends State<LayoutScreen> {
               padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 42.h),
               child: Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      const MainHomeWidget(
-                        image: AppImages.mailIcon,
-                        title: '       سداد      ',
-                      ),
-                      horizontalSpacer(30),
-                      const MainHomeWidget(
-                        image: AppImages.transferIcon,
-                        title: 'التحويلات',
-                      ),
-                      horizontalSpacer(30),
-                      GestureDetector(
-                        onTap: () {},
-                        child: const MainHomeWidget(
-                          image: AppImages.accountPersonIcon,
-                          title: 'الحسابات',
+                  Padding(
+                    padding:  EdgeInsets.only(left: 15.w,right: 25.w),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const MainHomeWidget(
+                          image: AppImages.mailIcon,
+                          title: 'سداد',
                         ),
-                      ),
-                    ],
+                        const MainHomeWidget(
+                          image: AppImages.transferIcon,
+                          title: 'التحويلات',
+                        ),
+                        GestureDetector(
+                          onTap: () {},
+                          child: const MainHomeWidget(
+                            image: AppImages.accountPersonIcon,
+                            title: 'الحسابات',
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                   verticalSpacer(27),
-                  Row(
+                  const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const MainHomeWidget(
+                      MainHomeWidget(
                         image: AppImages.tradeIcon,
-                        title: 'التجارة الإلكترونية ',
+                        title: 'التجارة الإلكترونية',
                       ),
-                      horizontalSpacer(30),
-                      const MainHomeWidget(
+                      MainHomeWidget(
                         image: AppImages.fireiCON,
-                        title: '      أرامكو       ',
+                        title: 'أرامكو',
                       ),
-                      horizontalSpacer(30),
-                      const MainHomeWidget(
+                      MainHomeWidget(
                         image: AppImages.walletIcon,
                         title: 'بطاقات الشركات',
                       ),
@@ -102,7 +104,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
                     child: MainHomeWidget(
                       textAlign: TextAlign.center,
                       image: AppImages.profileIcon,
-                      title: 'إعدادات \nالملف الشخصي ',
+                      title: 'إعدادات \nالملف الشخصي',
                     ),
                   ),
                 ],
@@ -116,9 +118,10 @@ class _LayoutScreenState extends State<LayoutScreen> {
           Image.asset(AppImages.homeBottomNav),
           GestureDetector(
             onTap: (){
-
+              goToWidget(screen: const AccountSummaryScreen());
             },
-            child: const SizedBox(
+            child:  Container(
+              color: Colors.transparent,
               width: 70,
               height: 75,
             ),

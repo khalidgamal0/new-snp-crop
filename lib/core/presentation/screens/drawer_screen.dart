@@ -1,10 +1,10 @@
 import 'package:artificial_intelligence/core/presentation/widgets/responsive_space.dart';
+import 'package:artificial_intelligence/core/routes/app_navigators.dart';
 import 'package:artificial_intelligence/core/utils/app_images.dart';
 import 'package:artificial_intelligence/core/utils/app_text_styles.dart';
+import 'package:artificial_intelligence/features/account_summary/presentation/views/account_summary_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-
 import '../../../features/layout/presentation/views/layout_screen.dart';
 import '../../utils/app_colors.dart';
 
@@ -33,7 +33,7 @@ class DrawerScreen extends StatelessWidget {
                       children: [
                         GestureDetector(
                             onTap: () {
-                              drawerKey.currentState!.closeDrawer();
+                             goBack();
                             },
                             child: Image.asset(AppImages.drawerIcon)),
                         verticalSpacer(62),
@@ -92,9 +92,20 @@ class DrawerScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const DrawerItem(icon:AppImages.homeIcon ,title: 'الرئيسية',),
-                      verticalSpacer(15),
-                      const DrawerItem(icon:AppImages.drawerIcon ,title: 'الملخص',),
-                      verticalSpacer(15),
+                      GestureDetector(
+                        onTap: (){
+
+                          goToWidget(screen: const AccountSummaryScreen());
+                        },
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            verticalSpacer(15),
+                            const DrawerItem(icon:AppImages.drawerIcon ,title: 'الملخص',),
+                            verticalSpacer(15),
+                          ],
+                        ),
+                      ),
                       const DrawerItem(icon:AppImages.accountPersonIcon ,title: 'الحسابات',),
                       verticalSpacer(15),
                       const DrawerItem(icon:AppImages.transferIcon ,title: 'التحويلات',),

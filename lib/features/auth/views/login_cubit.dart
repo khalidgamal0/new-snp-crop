@@ -88,6 +88,7 @@ mixin LoginCubit {
                  CustomTextFormField(
                    prefixIcon: AppImages.verificationCoder,
                    controller: verivicationController,
+                   textInputType: TextInputType.phone,
                    hintText:
                    '                  ادخل رمز التفعيل',
                    hintStyle: AppTextStyles.textStyle14
