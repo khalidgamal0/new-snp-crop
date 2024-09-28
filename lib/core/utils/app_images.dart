@@ -35,4 +35,10 @@ abstract class AppImages {
   static const String notificationIcon = '${_imagePath}notification.png';
   static const String langIcon = '${_imagePath}lan-image.png';
   static const String homeIcon = '${_imagePath}home-icon.png';
+  static const String upIcon = '${_imagePath}up-icon.png';
+  static const String arrowUp = '${_imagePath}arrow-up.svg';
+  static const String person = '${_imagePath}person.png';
+  static const String clockSvg = '${_imagePath}clock-icon.svg';
+  static const String notIcon = '${_imagePath}not-icon.svg';
+  static const String tapBar = '${_imagePath}tap-bar.svg';
 }
