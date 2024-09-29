@@ -1,0 +1,1 @@
+{"flutter":{"platforms":{"android":{"default":{"projectId":"snp-dashboard","appId":"1:765490082494:android:ba5d2b2c8ffcbc31a924ef","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"snp-dashboard","configurations":{"android":"1:765490082494:android:ba5d2b2c8ffcbc31a924ef","ios":"1:765490082494:ios:369228f2c8296eb9a924ef"}}}}}}

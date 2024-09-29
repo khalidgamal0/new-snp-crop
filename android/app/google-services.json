@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "765490082494",
+    "project_id": "snp-dashboard",
+    "storage_bucket": "snp-dashboard.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:765490082494:android:ba5d2b2c8ffcbc31a924ef",
+        "android_client_info": {
+          "package_name": "com.example.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDk5Vb1lZNXtdIP8btD95SA_CsGt_Xd9O4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
