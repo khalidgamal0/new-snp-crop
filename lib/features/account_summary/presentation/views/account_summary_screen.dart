@@ -9,6 +9,7 @@ import '../../../../core/presentation/widgets/responsive_space.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_images.dart';
 import '../../../../core/utils/app_text_styles.dart';
+import '../../../splash/cubit/splash_cubit.dart';
 import 'account_details_screen.dart';
 
 class AccountSummaryScreen extends StatefulWidget {
@@ -77,17 +78,17 @@ class _AccountSummaryScreenState extends State<AccountSummaryScreen> {
           // if(isOpen)
           ...[
             const AccountItem(
-              name: 'Empty',
+              name: 'فارغ',
               id: '01400019038001',
               price: '0.00',
               status: 'مغلق',
             ),
             AccountItem(
               isFinal: true,
-              name: 'Empty',
-              id: '27400000535107',
-              price: '5.94',
-              status: 'نشط',
+              name: accountDetailsModel?.outerName??'فارغ',
+              id: accountDetailsModel?.accountNumber??'27400000535107',
+              price: accountDetailsModel?.outerBalance??'5.94',
+              status:accountDetailsModel?.status??'نشط',
               onTap: () {
                 goToWidget(screen: const AccountDetailsScreen());
               },

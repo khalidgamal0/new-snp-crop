@@ -6,6 +6,7 @@ import 'package:artificial_intelligence/features/account_summary/presentation/vi
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../features/layout/presentation/views/layout_screen.dart';
+import '../../../features/splash/cubit/splash_cubit.dart';
 import '../../utils/app_colors.dart';
 
 class DrawerScreen extends StatelessWidget {
@@ -55,7 +56,7 @@ class DrawerScreen extends StatelessWidget {
                         ),
                         verticalSpacer(8),
                         Text(
-                          'necr328351 - 1010876749',
+                          '${basicInfoModel?.userName??'necr328351'} - ${basicInfoModel?.userNumber??'1010876749'}',
                           style: AppTextStyles.textStyle16,
                         ),
                         Text(
