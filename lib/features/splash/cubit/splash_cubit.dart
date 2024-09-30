@@ -13,17 +13,37 @@ BasicInfoModel? basicInfoModel;
 AccountDetailsModel? accountDetailsModel;
 List<TransactionModel> transactionModel=[];
 List<TransactionModel> filterTransactionModel=[];
+DateTime parseDate(String dateString) {
+  List<String> parts = dateString.split('-');
+  int day = int.parse(parts[0]);
+  int month = int.parse(parts[1]);
+  int year = int.parse(parts[2]);
+  return DateTime(year, month, day);
+}
 
 
-List<TransactionModel> filterLogsByDate(String start, String end) {
-  DateTime startDate = DateTime.parse(start);
-  DateTime endDate = DateTime.parse(end);
-  filterTransactionModel=transactionModel;
 
-  return filterTransactionModel.where((log) {
-    DateTime logDate = DateTime.parse(log.time??'2023-09-15');
-    return logDate.isAfter(startDate) && logDate.isBefore(endDate);
-  }).toList();
+void filterLogsByDate(String start, String end) {
+  // Parse start and end dates from the input strings
+  DateTime startDate = parseDate(start);
+  DateTime endDate = parseDate(end);
+
+  // Clear the filtered list before adding new entries
+  filterTransactionModel.clear();
+
+  // Filter transactionModel based on the date range
+  for (var log in transactionModel) {
+    DateTime logDate = parseDate(log.time!);
+
+    // Check if the logDate is within the range (including start and end)
+    if ((logDate.isAfter(startDate) || logDate.isAtSameMomentAs(startDate)) &&
+        (logDate.isBefore(endDate) || logDate.isAtSameMomentAs(endDate))) {
+      filterTransactionModel.add(log);
+    }
+  }
+
+  // Log the number of filtered transactions
+  log('Filtered transactions count: ${filterTransactionModel.length}');
 }
 
 class SplashCubit extends Cubit<SplashState> {
@@ -100,13 +120,6 @@ class SplashCubit extends Cubit<SplashState> {
   // }
 
 
-  // DateTime parseDate(String dateString) {
-  //   List<String> parts = dateString.split('-');
-  //   int day = int.parse(parts[0]);
-  //   int month = int.parse(parts[1]);
-  //   int year = int.parse(parts[2]);
-  //   return DateTime(year, month, day);
-  // }
 
 
 }
