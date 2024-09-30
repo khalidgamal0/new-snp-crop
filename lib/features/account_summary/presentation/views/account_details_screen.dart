@@ -2,6 +2,7 @@ import 'package:artificial_intelligence/core/presentation/screens/drawer_screen.
 import 'package:artificial_intelligence/features/account_summary/presentation/views/widgets/accountDetailsItem.dart';
 import 'package:artificial_intelligence/features/account_summary/presentation/views/widgets/last_transaction_item.dart';
 import 'package:artificial_intelligence/features/filter/presentation/views/filter_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -11,6 +12,7 @@ import '../../../../core/routes/app_navigators.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_images.dart';
 import '../../../../core/utils/app_text_styles.dart';
+import '../../../splash/cubit/splash_cubit.dart';
 
 final GlobalKey<ScaffoldState> drawerKey = GlobalKey();
 
@@ -60,7 +62,11 @@ class AccountDetailsScreen extends StatelessWidget {
               ),
             ),
             verticalSpacer(24),
-            const AccountItem(),
+             AccountItem(
+              name:accountDetailsModel?.status??'نشط',id:accountDetailsModel?.accountNumber??'27400000535107' ,balance:accountDetailsModel?.outerBalance??'5.94' ,
+
+
+            ),
             verticalSpacer(16),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -76,14 +82,44 @@ class AccountDetailsScreen extends StatelessWidget {
               ),
             ),
             verticalSpacer(16),
-            ListView.builder(
-              shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                padding: EdgeInsets.zero,
-                itemBuilder: (context, index) => AccountDetailsItem(
-                      isFinal: index == 7,
-                    ),
-                itemCount: 8),
+            AccountDetailsItem(
+              name:'إسم الحساب ',
+              value:accountDetailsModel?.innerName??'محل وردة النرجس للزهور'  ,
+            ),
+            AccountDetailsItem(
+              name:'الإسم المختصر ' ,
+              value: accountDetailsModel?.observationName??'مشتل مكه',
+            ),
+            AccountDetailsItem(
+              name:'العمله' ,
+              value:  accountDetailsModel?.currency??'SAR',
+            ),
+            AccountDetailsItem(
+              name:'الحاله' ,
+              value:  accountDetailsModel?.status??'نشط',
+            ),
+            AccountDetailsItem(
+              name:'رقم حساب الأبيان' ,
+              value: accountDetailsModel?.iPan?? 'SA361000000140012795200',
+            ),
+            AccountDetailsItem(
+              name:'الرصيد' ,
+              value: 'SAR ${accountDetailsModel?.balance ?? '4.32'}',
+            ),
+            AccountDetailsItem(
+              name:'الرصيد الحالي' ,
+              value:  'SAR ${accountDetailsModel?.currentBalance ?? '4.32'}',
+            ),
+            AccountDetailsItem(
+              name:'حد السحب علي المكشوف' ,
+              value:  'SAR ${accountDetailsModel?.overLimited ?? '0.00'}',
+            ),
+            AccountDetailsItem(
+              isFinal: true,
+              name:'المبالغ المحجوزة' ,
+              value:  'SAR ${accountDetailsModel?.reservedAmount ?? '0.00'}',
+            ),
+
             verticalSpacer(16),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -115,11 +151,12 @@ class AccountDetailsScreen extends StatelessWidget {
               ),
             ),
             verticalSpacer(16),
+
             ListView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) => const LastTransactionsItem(),
-              itemCount: 8,
+              itemBuilder: (context, index) =>  LastTransactionsItem(transactionModel:transactionModel[index],),
+              itemCount: transactionModel.length,
             )
           ],
         ),

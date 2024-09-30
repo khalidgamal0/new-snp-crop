@@ -7,9 +7,10 @@ import '../../../../../core/utils/app_text_styles.dart';
 
 class AccountDetailsItem extends StatelessWidget {
   const AccountDetailsItem({
-    super.key,  this.isFinal=false,
+    super.key,  this.isFinal=false, required this.name, required this.value,
   });
   final bool isFinal;
+  final String name,value;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,13 +30,13 @@ class AccountDetailsItem extends StatelessWidget {
       child: Row(
         children: [
           Text(
-            'إسم الحساب ',
+            name,
             style: AppTextStyles.textStyle12
                 .copyWith(color: AppColors.color514F4F),
           ),
           const Spacer(),
           Text(
-            'محل وردة النرجس للزهور',
+            value,
             style: AppTextStyles.textStyle12
                 .copyWith(color: AppColors.color514F4F),
           ),

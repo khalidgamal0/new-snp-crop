@@ -1,3 +1,4 @@
+import 'package:artificial_intelligence/features/account_summary/data/model/transaction_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -5,11 +6,13 @@ import '../../../../../core/presentation/widgets/responsive_space.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_text_styles.dart';
 
+
 class LastTransactionsItem extends StatelessWidget {
   const LastTransactionsItem({
-    super.key,
+    super.key, required this.transactionModel,
   });
 
+  final TransactionModel transactionModel;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -28,12 +31,12 @@ class LastTransactionsItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'تحويل داخلي صادر',
+                transactionModel.operationName?? 'تحويل داخلي صادر',
                 style: AppTextStyles.textStyle12,
               ),
               verticalSpacer(4),
               Text(
-                '2023-12-18',
+                transactionModel.time?? '2023-12-18',
                 style: AppTextStyles.textStyle10.copyWith(color: Colors.black),
               ),
             ],
@@ -43,13 +46,13 @@ class LastTransactionsItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'SAR 3.00-',
+                'SAR ${transactionModel.tax}',
                 style: AppTextStyles.textStyle10
                     .copyWith(color: const Color(0xffE63637)),
               ),
               verticalSpacer(4),
               Text(
-                'SAR 5.94',
+                'SAR ${transactionModel.balance}',
                 style: AppTextStyles.textStyle10.copyWith(color: Colors.black),
               ),
             ],

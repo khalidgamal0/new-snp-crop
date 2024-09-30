@@ -8,8 +8,9 @@ import '../../utils/app_text_styles.dart';
 class AccountItem extends StatelessWidget {
   const AccountItem({
     super.key,
+    required this.name, required this.id, required this.balance,
   });
-
+ final String name,id,balance;
   @override
   Widget build(BuildContext context) {
     return Container(

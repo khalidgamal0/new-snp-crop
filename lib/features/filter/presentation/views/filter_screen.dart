@@ -11,6 +11,7 @@ import '../../../../core/routes/app_navigators.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_images.dart';
 import '../../../../core/utils/app_text_styles.dart';
+import '../../../splash/cubit/splash_cubit.dart';
 
 class FilterScreen extends StatefulWidget {
   const FilterScreen({super.key});
@@ -62,7 +63,10 @@ class _FilterScreenState extends State<FilterScreen> {
               ),
             ),
             verticalSpacer(24),
-            const AccountItem(),
+             AccountItem(
+              name:accountDetailsModel?.status??'نشط',id:accountDetailsModel?.accountNumber??'27400000535107' ,balance:accountDetailsModel?.outerBalance??'5.94' ,
+
+            ),
             verticalSpacer(24),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -287,12 +291,18 @@ class _FilterScreenState extends State<FilterScreen> {
                 buttonName: 'بحث',
                 onTap: () {
                   isSearch = true;
+                  if(startTime!='DD/MM/YYYY'&&endTime!='DD/MM/YYYY') {
+                    filterLogsByDate(startTime,endTime);
+                  }
+
+
+
                   setState(() {});
                 },
               ),
             ),
             verticalSpacer(24),
-            if (isSearch) ...[
+            if (isSearch&&withDate) ...[
               Padding(
                 padding: EdgeInsets.only(right: 16.w, bottom: 16.h),
                 child: Text(
@@ -301,12 +311,17 @@ class _FilterScreenState extends State<FilterScreen> {
                       AppTextStyles.textStyle14.copyWith(color: Colors.black),
                 ),
               ),
-              ListView.builder(
+              filterTransactionModel.isEmpty?SizedBox(
+                height: 200.h,
+                child: const Center(child: CupertinoActivityIndicator ()),
+              ):  ListView.builder(
                   padding: EdgeInsets.zero,
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemBuilder: (context, index) => const LastTransactionsItem(),
-                  itemCount: 8)
+                  itemBuilder: (context, index) =>  LastTransactionsItem(
+                    transactionModel:transactionModel[index] ,
+                  ),
+                  itemCount: transactionModel.length)
             ]
           ],
         ),

@@ -8,6 +8,7 @@ import '../../../core/utils/app_colors.dart';
 import '../../../core/utils/app_images.dart';
 import '../../../core/utils/app_text_styles.dart';
 import '../../layout/presentation/views/layout_screen.dart';
+import '../../splash/cubit/splash_cubit.dart';
 
 mixin LoginCubit {
    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -60,7 +61,7 @@ mixin LoginCubit {
                    MainAxisAlignment.spaceBetween,
                    children: [
                      Text(
-                       '053****347',
+                       basicInfoModel?.verifyCode??'053****347',
                        textDirection: TextDirection.ltr,
                        style: TextStyle(
                            fontSize: 17.sp,
