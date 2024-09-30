@@ -23,6 +23,7 @@ class FilterScreen extends StatefulWidget {
 class _FilterScreenState extends State<FilterScreen> {
   bool withDate = false;
   bool isSearch = false;
+  bool isLoading = false;
   String startTime = 'DD/MM/YYYY';
   String endTime = 'DD/MM/YYYY';
 
@@ -63,9 +64,10 @@ class _FilterScreenState extends State<FilterScreen> {
               ),
             ),
             verticalSpacer(24),
-             AccountItem(
-              name:accountDetailsModel?.status??'نشط',id:accountDetailsModel?.accountNumber??'27400000535107' ,balance:accountDetailsModel?.outerBalance??'5.94' ,
-
+            AccountItem(
+              name: accountDetailsModel?.status ?? 'نشط',
+              id: accountDetailsModel?.accountNumber ?? '27400000535107',
+              balance: accountDetailsModel?.outerBalance ?? '5.94',
             ),
             verticalSpacer(24),
             Padding(
@@ -160,7 +162,7 @@ class _FilterScreenState extends State<FilterScreen> {
                           onTap: () {
                             showDatePicker(context, onDateTimeChanged: (date) {
                               startTime =
-                                  '${date.day}-${date.month}-${date.year}';
+                                  '${date.year}-${date.month}-${date.day}';
                               setState(() {});
                             });
                           },
@@ -192,7 +194,7 @@ class _FilterScreenState extends State<FilterScreen> {
                           onTap: () {
                             showDatePicker(context, onDateTimeChanged: (date) {
                               endTime =
-                                  '${date.day}-${date.month}-${date.year}';
+                                  '${date.year}-${date.month}-${date.day}';
                               setState(() {});
                             });
                           },
@@ -287,22 +289,26 @@ class _FilterScreenState extends State<FilterScreen> {
             verticalSpacer(16),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: CustomButton(
-                buttonName: 'بحث',
-                onTap: () {
-                  isSearch = true;
-                  if(startTime!='DD/MM/YYYY'&&endTime!='DD/MM/YYYY') {
-                    filterLogsByDate(startTime,endTime);
-                  }
-
-
-
-                  setState(() {});
-                },
-              ),
+              child: isLoading
+                  ? const Center(child: CupertinoActivityIndicator())
+                  : CustomButton(
+                      buttonName: 'بحث',
+                      onTap: () async {
+                        isLoading = true;
+                        setState(() {});
+                        await Future.delayed(const Duration(milliseconds: 10));
+                        isSearch = true;
+                        if (startTime != 'DD/MM/YYYY' &&
+                            endTime != 'DD/MM/YYYY') {
+                          filterLogsByDate(startTime, endTime);
+                        }
+                        setState(() {});
+                        isLoading = false;
+                      },
+                    ),
             ),
             verticalSpacer(24),
-            if (isSearch&&withDate) ...[
+            if (isSearch && withDate) ...[
               Padding(
                 padding: EdgeInsets.only(right: 16.w, bottom: 16.h),
                 child: Text(
@@ -311,17 +317,25 @@ class _FilterScreenState extends State<FilterScreen> {
                       AppTextStyles.textStyle14.copyWith(color: Colors.black),
                 ),
               ),
-              filterTransactionModel.isEmpty?SizedBox(
-                height: 200.h,
-                child: const Center(child: CupertinoActivityIndicator ()),
-              ):  ListView.builder(
-                  padding: EdgeInsets.zero,
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) =>  LastTransactionsItem(
-                    transactionModel:transactionModel[index] ,
-                  ),
-                  itemCount: transactionModel.length)
+              filterTransactionModel.isEmpty
+                  ? SizedBox(
+                      height: 100.h,
+                      child: Center(
+                        child: Text(
+                          'لا يوجد عمليات في هذا التوقيت',
+                          style: AppTextStyles.textStyle12
+                              .copyWith(color: AppColors.color514F4F),
+                        ),
+                      ),
+                    )
+                  : ListView.builder(
+                      padding: EdgeInsets.zero,
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) => LastTransactionsItem(
+                            transactionModel: filterTransactionModel[index],
+                          ),
+                      itemCount: filterTransactionModel.length)
             ]
           ],
         ),
@@ -344,7 +358,7 @@ void showDatePicker(BuildContext context,
           children: [
             verticalSpacer(8),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w,vertical: 8.h),
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
