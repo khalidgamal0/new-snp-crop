@@ -43,7 +43,7 @@ flutter:
     - assets/images/
     - assets/images/splash.png
     - assets/images/login_bg.jfif.jpg
-    - assets/fonts/roboto/
+    - assets/fonts/roboto//
     - assets/fonts/typogarphy/
     - assets/fonts/Lintel-Reg-Ital/
 

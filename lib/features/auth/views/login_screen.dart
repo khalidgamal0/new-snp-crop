@@ -101,7 +101,7 @@ class LoginScreen extends StatelessWidget with LoginCubit {
           ),
         ),
       ),
-      bottomNavigationBar: Image.asset(AppImages.loginBottomNav),
+      bottomNavigationBar: Image.asset(AppImages.loginBottomNav,fit: BoxFit.cover,),
     );
   }
 

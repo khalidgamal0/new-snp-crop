@@ -115,7 +115,10 @@ class _LayoutScreenState extends State<LayoutScreen> {
       ),
       bottomNavigationBar: Stack(
         children: [
-          Image.asset(AppImages.homeBottomNav),
+          SizedBox(
+              width: double.infinity,
+
+              child: Image.asset(AppImages.homeBottomNav,fit: BoxFit.cover,)),
           GestureDetector(
             onTap: (){
               goToWidget(screen: const AccountSummaryScreen());
