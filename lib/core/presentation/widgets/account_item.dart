@@ -32,25 +32,33 @@ class AccountItem extends StatelessWidget {
                         .copyWith(fontWeight: FontWeight.w500),
                     children: [
                       TextSpan(
-                        text: ' نشط',
+                        text:name,
+
                         style: AppTextStyles.textStyle12.copyWith(
+                            overflow: TextOverflow.ellipsis,
                             fontFamily: 'Typography',
                             color: AppColors.color917F7F),
                       )
                     ]),
               ),
               Text(
-                '27400000535107',
+               id,
+                overflow: TextOverflow.ellipsis,
                 style: AppTextStyles.textStyle12
                     .copyWith(color: AppColors.color6A5555),
               )
             ],
           ),
-          const Spacer(),
-          Text(
-            'SAR  5.94',
-            style: AppTextStyles.textStyle12.copyWith(
-              color: AppColors.color6A5555,
+
+          Expanded(
+
+            child: Text(
+              textAlign: TextAlign.end,
+              overflow: TextOverflow.ellipsis,
+              'SAR $balance',
+              style: AppTextStyles.textStyle12.copyWith(
+                color: AppColors.color6A5555,
+              ),
             ),
           ),
           horizontalSpacer(16),

@@ -27,7 +27,7 @@ mixin LoginCubit {
          contentPadding: EdgeInsets.zero,
          content: Container(
            width: double.infinity,
-           height: 375.h,
+           height: 380.h,
            padding: EdgeInsets.only(
              top: 32.h,
              right: 8.w,

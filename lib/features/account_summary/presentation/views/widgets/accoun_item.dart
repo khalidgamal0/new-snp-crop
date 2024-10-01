@@ -36,33 +36,39 @@ final void Function()? onTap;
           children: [
             Image.asset(AppImages.person),
             horizontalSpacer(19),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                RichText(
-                  text: TextSpan(
-                      text: name,
-                      style: AppTextStyles.textStyle12
-                          .copyWith(fontWeight: FontWeight.w500),
-                      children: [
-                        TextSpan(
-                          text: '    ($status)',
-                          style: AppTextStyles.textStyle12.copyWith(
-                              fontFamily: 'Typography',
-                              color: AppColors.color917F7F),
-                        )
-                      ]),
-                ),
-                Text(
-                  id,
-                  style: AppTextStyles.textStyle12
-                      .copyWith(color: AppColors.color6A5555),
-                )
-              ],
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  RichText(
+                    text: TextSpan(
+                        text: name,
+                        style: AppTextStyles.textStyle12
+                            .copyWith(
+                            overflow: TextOverflow.ellipsis,
+                            fontWeight: FontWeight.w500),
+                        children: [
+                          TextSpan(
+                            text: '    ($status)',
+                            style: AppTextStyles.textStyle12.copyWith(
+                                fontFamily: 'Typography',
+                                color: AppColors.color917F7F),
+                          )
+                        ]),
+                  ),
+                  Text(
+                    overflow: TextOverflow.ellipsis,
+                    id,
+                    style: AppTextStyles.textStyle12
+                        .copyWith(color: AppColors.color6A5555),
+                  )
+                ],
+              ),
             ),
-            const Spacer(),
+
             Text(
               'SAR  $price',
+              overflow: TextOverflow.ellipsis,
               style: AppTextStyles.textStyle12.copyWith(
                 color: AppColors.color6A5555,
               ),
