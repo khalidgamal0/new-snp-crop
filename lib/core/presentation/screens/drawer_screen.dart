@@ -24,7 +24,6 @@ class DrawerScreen extends StatelessWidget {
           child: Column(
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
                     color: Colors.black.withOpacity(.4),
@@ -42,30 +41,36 @@ class DrawerScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 10.w),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Image.asset(AppImages.snpLogo),
-                        verticalSpacer(9),
-                        Text(
-                          'Welcome Back [AR] ',
-                          style: AppTextStyles.textStyleLintel
-                              .copyWith(color: Colors.white),
-                        ),
-                        verticalSpacer(8),
-                        Text(
-                          '${basicInfoModel?.userName??'necr328351'} - ${basicInfoModel?.userNumber??'1010876749'}',
-                          style: AppTextStyles.textStyle16,
-                        ),
-                        Text(
-                          'Lasr login: 28/ 08/2024 [AR] ',
-                          style: AppTextStyles.textStyle14.copyWith(
-                            fontWeight: FontWeight.w300,
+                  horizontalSpacer(10),
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 10.w),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Image.asset(AppImages.snpLogo),
+                          verticalSpacer(9),
+                          Text(
+                            'Welcome Back [AR] ',
+                            overflow: TextOverflow.ellipsis,
+                            style: AppTextStyles.textStyleLintel
+                                .copyWith(color: Colors.white),
                           ),
-                        ),
-                      ],
+                          verticalSpacer(8),
+                          Text(
+                            overflow: TextOverflow.ellipsis,
+                            '${basicInfoModel?.userName??'necr328351'} - ${basicInfoModel?.userNumber??'1010876749'}',
+                            style: AppTextStyles.textStyle16,
+                          ),
+                          Text(
+                            'Lasr login: 28/ 08/2024 [AR] ',
+                            overflow: TextOverflow.ellipsis,
+                            style: AppTextStyles.textStyle14.copyWith(
+                              fontWeight: FontWeight.w300,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -145,10 +150,12 @@ final String icon,title;
         Padding(
           padding: const EdgeInsets.symmetric(horizontal:16),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
             Image.asset(icon,height: 30,width: 30,),
-            Text(title,style: AppTextStyles.textStyle14,),
+            Expanded(child: Text(
+              textAlign: TextAlign.end,
+              overflow: TextOverflow.ellipsis,
+              title,style: AppTextStyles.textStyle14,)),
           ],),
         ),
         verticalSpacer(10),

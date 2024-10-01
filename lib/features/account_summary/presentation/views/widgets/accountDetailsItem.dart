@@ -28,17 +28,21 @@ class AccountDetailsItem extends StatelessWidget {
         ),
       ),
       child: Row(
+
         children: [
           Text(
             name,
             style: AppTextStyles.textStyle12
                 .copyWith(color: AppColors.color514F4F),
           ),
-          const Spacer(),
-          Text(
-            value,
-            style: AppTextStyles.textStyle12
-                .copyWith(color: AppColors.color514F4F),
+          Expanded(
+            child: Text(
+              textAlign: TextAlign.end,
+              value,
+              overflow: TextOverflow.ellipsis,
+              style: AppTextStyles.textStyle12
+                  .copyWith(color: AppColors.color514F4F),
+            ),
           ),
         ],
       ),

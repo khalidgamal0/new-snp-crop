@@ -19,7 +19,6 @@ class AccountSummaryScreen extends StatefulWidget {
   State<AccountSummaryScreen> createState() => _AccountSummaryScreenState();
 }
 
-final GlobalKey<ScaffoldState> drawerKey = GlobalKey();
 
 class _AccountSummaryScreenState extends State<AccountSummaryScreen> {
   bool isOpen = true;
@@ -27,13 +26,10 @@ class _AccountSummaryScreenState extends State<AccountSummaryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: drawerKey,
-      drawer: const DrawerScreen(),
       backgroundColor: const Color(0xffEEEDEB),
       appBar: AppBar(
         leading: GestureDetector(
             onTap: () {
-              drawerKey.currentState!.openDrawer();
             },
             child: Image.asset(AppImages.drawerIcon)),
         title: Text(

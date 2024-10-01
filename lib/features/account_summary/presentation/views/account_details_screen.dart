@@ -14,7 +14,6 @@ import '../../../../core/utils/app_images.dart';
 import '../../../../core/utils/app_text_styles.dart';
 import '../../../splash/cubit/splash_cubit.dart';
 
-final GlobalKey<ScaffoldState> drawerKey = GlobalKey();
 
 class AccountDetailsScreen extends StatelessWidget {
   const AccountDetailsScreen({super.key});
@@ -22,13 +21,10 @@ class AccountDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: drawerKey,
-      drawer: const DrawerScreen(),
       backgroundColor: const Color(0xffEEEDEB),
       appBar: AppBar(
         leading: GestureDetector(
             onTap: () {
-              drawerKey.currentState!.openDrawer();
             },
             child: Image.asset(AppImages.drawerIcon)),
         title: Text(
