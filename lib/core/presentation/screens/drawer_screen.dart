@@ -51,7 +51,7 @@ class DrawerScreen extends StatelessWidget {
                           Image.asset(AppImages.snpLogo),
                           verticalSpacer(9),
                           Text(
-                            'Welcome Back [AR] ',
+                            'مرحبًا بعودتك',
                             overflow: TextOverflow.ellipsis,
                             style: AppTextStyles.textStyleLintel
                                 .copyWith(color: Colors.white),
@@ -62,13 +62,13 @@ class DrawerScreen extends StatelessWidget {
                             '${basicInfoModel?.userName??'necr328351'} - ${basicInfoModel?.userNumber??'1010876749'}',
                             style: AppTextStyles.textStyle16,
                           ),
-                          Text(
-                            'Lasr login: 28/ 08/2024 [AR] ',
-                            overflow: TextOverflow.ellipsis,
-                            style: AppTextStyles.textStyle14.copyWith(
-                              fontWeight: FontWeight.w300,
-                            ),
-                          ),
+                          // Text(
+                          //   'Lasr login: 28/ 08/2024 [AR] ',
+                          //   overflow: TextOverflow.ellipsis,
+                          //   style: AppTextStyles.textStyle14.copyWith(
+                          //     fontWeight: FontWeight.w300,
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),

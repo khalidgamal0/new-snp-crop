@@ -27,7 +27,7 @@ class CustomTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: 344.w,
-      height: 70.h,
+      height: 75.h,
       child: TextFormField(
         controller: controller,
         style: TextStyle(

@@ -53,7 +53,7 @@ class LoginScreen extends StatelessWidget with LoginCubit {
                 CustomTextFormField(
                   currentFocusNode: corporateFocus,
                   nextFocusNode: userFocus,
-                  hintText: 'Corporate ID [AR] ',
+                  hintText: 'معرف الشركة',
                   prefixIcon: AppImages.corporateIcon,
                   validator: (val) {
                     if (val!.isEmpty) {
@@ -67,7 +67,7 @@ class LoginScreen extends StatelessWidget with LoginCubit {
                   currentFocusNode: userFocus,
                   nextFocusNode: passFocus,
                   prefixIcon: AppImages.userIcon,
-                  hintText: 'User ID [AR] ',
+                  hintText: 'معرف المستخدم',
                   validator: (val) {
                     if (val!.isEmpty) {
                       return 'مطلوب';
@@ -80,7 +80,7 @@ class LoginScreen extends StatelessWidget with LoginCubit {
                   currentFocusNode: passFocus,
                   nextFocusNode: passFocus,
                   prefixIcon: AppImages.lockIcon,
-                  hintText: 'Password ID [AR] ',
+                  hintText: 'معرف كلمة المرور',
                   validator: (val) {
                     if (val!.isEmpty) {
                       return 'مطلوب';

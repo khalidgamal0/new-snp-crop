@@ -73,12 +73,12 @@ class _AccountSummaryScreenState extends State<AccountSummaryScreen> {
           ),
           // if(isOpen)
           ...[
-            const AccountItem(
-              name: 'فارغ',
-              id: '01400019038001',
-              price: '0.00',
-              status: 'مغلق',
-            ),
+            // const AccountItem(
+            //   name: 'فارغ',
+            //   id: '01400019038001',
+            //   price: '0.00',
+            //   status: 'مغلق',
+            // ),
             AccountItem(
               isFinal: true,
               name: accountDetailsModel?.outerName??'فارغ',

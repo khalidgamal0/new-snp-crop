@@ -27,7 +27,7 @@ mixin LoginCubit {
          contentPadding: EdgeInsets.zero,
          content: Container(
            width: double.infinity,
-           height: 380.h,
+           height: 385.h,
            padding: EdgeInsets.only(
              top: 32.h,
              right: 8.w,
@@ -38,7 +38,7 @@ mixin LoginCubit {
            child: Form(
              key: verivicationFormKey,
              child: Column(
-               crossAxisAlignment: CrossAxisAlignment.end,
+               crossAxisAlignment: CrossAxisAlignment.start,
                children: [
                  Text(
                    'تعميد الدخول',
@@ -50,7 +50,11 @@ mixin LoginCubit {
                    width: 279,
                    height: 40,
                    style: AppTextStyles.textStyle14,
-                   buttonName: 'رسالة قصيرة',
+                   buttonName: 'تأكيد',
+                   onTap: (){
+                     goToWidget(
+                         screen: const LayoutScreen());
+                   },
                    color: AppColors.secondary,
                  ),
                  verticalSpacer(24),
@@ -70,9 +74,7 @@ mixin LoginCubit {
                      ),
                      horizontalSpacer(8),
                      Text(
-                       'Please wait 28 seconds[AR]\n'
-                           ' before requesting another SMS\n'
-                           ' code',
+                       'يرجى الانتظار 28 ثانية قبل \nطلب رسالة نصية قصيرة أخرى',
                        textAlign: TextAlign.start,
                        style: AppTextStyles.textStyle12
                            .copyWith(color: AppColors.grey),
@@ -80,10 +82,12 @@ mixin LoginCubit {
                    ],
                  ),
                  verticalSpacer(16),
-                 Text(
-                   ' Note:If you wish to update your mobile [AR]\n'
-                       'number kindly visit your nearest AlAhibranch',
-                   style: AppTextStyles.textStyleLintel,
+                 Align(
+                   alignment: Alignment.centerLeft,
+                   child: Text(
+                     'ملاحظة: إذا كنت ترغب في تحديث رقم هاتفك\n المحمول، يرجى زيارة أقرب فرع للبنك',
+                     style: AppTextStyles.textStyleLintel,
+                   ),
                  ),
                  verticalSpacer(16),
                  CustomTextFormField(
