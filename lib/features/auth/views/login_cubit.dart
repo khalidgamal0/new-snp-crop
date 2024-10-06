@@ -12,8 +12,8 @@ import '../../splash/cubit/splash_cubit.dart';
 
 mixin LoginCubit {
    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-   final GlobalKey<FormState> verivicationFormKey = GlobalKey<FormState>();
-   TextEditingController verivicationController=TextEditingController();
+   final GlobalKey<FormState> verificationFormKey = GlobalKey<FormState>();
+   TextEditingController verificationController=TextEditingController();
   FocusNode corporateFocus = FocusNode();
   FocusNode userFocus = FocusNode();
   FocusNode passFocus = FocusNode();
@@ -36,7 +36,7 @@ mixin LoginCubit {
            ),
            color: const Color(0XffFEFEFE),
            child: Form(
-             key: verivicationFormKey,
+             key: verificationFormKey,
              child: Column(
                crossAxisAlignment: CrossAxisAlignment.start,
                children: [
@@ -61,16 +61,18 @@ mixin LoginCubit {
                  Row(
                    crossAxisAlignment:
                    CrossAxisAlignment.start,
-                   mainAxisAlignment:
-                   MainAxisAlignment.spaceBetween,
                    children: [
-                     Text(
-                       basicInfoModel?.verifyCode??'053****347',
-                       textDirection: TextDirection.ltr,
-                       style: TextStyle(
-                           fontSize: 17.sp,
-                           fontWeight: FontWeight.w500,
-                           color: AppColors.grey),
+                     Expanded(
+                       child: Text(
+                         accountSetting?.verifyPhone??'053****347',
+                         textDirection: TextDirection.ltr,
+                         textAlign: TextAlign.end,
+                         style: TextStyle(
+                           overflow: TextOverflow.ellipsis,
+                             fontSize: 17.sp,
+                             fontWeight: FontWeight.w500,
+                             color: AppColors.grey),
+                       ),
                      ),
                      horizontalSpacer(8),
                      Text(
@@ -92,7 +94,7 @@ mixin LoginCubit {
                  verticalSpacer(16),
                  CustomTextFormField(
                    prefixIcon: AppImages.verificationCoder,
-                   controller: verivicationController,
+                   controller: verificationController,
                    textInputType: TextInputType.phone,
                    hintText:
                    '                  ادخل رمز التفعيل',
@@ -103,7 +105,7 @@ mixin LoginCubit {
                        fontWeight: FontWeight.w500),
                    onChanged: (val) {},
                    onFieldSubmitted: (val) {
-                     if (verivicationFormKey.currentState!
+                     if (verificationFormKey.currentState!
                          .validate()) {
                        goToWidget(
                            screen: const LayoutScreen());
@@ -113,7 +115,7 @@ mixin LoginCubit {
                  verticalSpacer(16),
                  Center(
                    child: Text(
-                     verivicationController.text.isEmpty
+                     verificationController.text.isEmpty
                          ? 'إعاده إرسال'
                          : '',
                      style: AppTextStyles.textStyle14.copyWith(

@@ -19,7 +19,6 @@ class AccountSummaryScreen extends StatefulWidget {
   State<AccountSummaryScreen> createState() => _AccountSummaryScreenState();
 }
 
-
 class _AccountSummaryScreenState extends State<AccountSummaryScreen> {
   bool isOpen = true;
 
@@ -29,9 +28,7 @@ class _AccountSummaryScreenState extends State<AccountSummaryScreen> {
       backgroundColor: const Color(0xffEEEDEB),
       appBar: AppBar(
         leading: GestureDetector(
-            onTap: () {
-            },
-            child: Image.asset(AppImages.drawerIcon)),
+            onTap: () {}, child: Image.asset(AppImages.drawerIcon)),
         title: Text(
           'ملخص الحساب',
           style: AppTextStyles.textStyle16,
@@ -50,85 +47,109 @@ class _AccountSummaryScreenState extends State<AccountSummaryScreen> {
           horizontalSpacer(20)
         ],
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 24.h, horizontal: 22.w),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'الحسابات الجارية',
-                  style:
-                      AppTextStyles.textStyle16.copyWith(color: Colors.black),
-                ),
-                GestureDetector(
-                    onTap: () {
-                      isOpen = !isOpen;
-                      setState(() {});
-                    },
-                    child: SvgPicture.asset(AppImages.arrowUp)),
-              ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 24.h, horizontal: 22.w),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'الحسابات الجارية',
+                    style:
+                        AppTextStyles.textStyle16.copyWith(color: Colors.black),
+                  ),
+                  GestureDetector(
+                      onTap: () {
+                        isOpen = !isOpen;
+                        setState(() {});
+                      },
+                      child: SvgPicture.asset(AppImages.arrowUp)),
+                ],
+              ),
             ),
-          ),
-          // if(isOpen)
-          ...[
-            // const AccountItem(
-            //   name: 'فارغ',
-            //   id: '01400019038001',
-            //   price: '0.00',
-            //   status: 'مغلق',
-            // ),
-            AccountItem(
-              isFinal: true,
-              name: accountDetailsModel?.outerName??'فارغ',
-              id: accountDetailsModel?.accountNumber??'27400000535107',
-              price: accountDetailsModel?.outerBalance??'5.94',
-              status:accountDetailsModel?.status??'نشط',
-              onTap: () {
-                goToWidget(screen: const AccountDetailsScreen());
-              },
+            // if(isOpen)
+            ...[
+              // const AccountItem(
+              //   name: 'فارغ',
+              //   id: '01400019038001',
+              //   price: '0.00',
+              //   status: 'مغلق',
+              // ),
+              activeAccountModel != null &&
+                  activeAccountModel?.data != null&&
+                      activeAccountModel?.data?.isNotEmpty == true
+                  ? ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) => AccountItem(
+                        isFinal:
+                            index == (activeAccountModel!.data!.length - 1),
+                        name: activeAccountModel!.data![index].accountName ??
+                            'فارغ',
+                        id: activeAccountModel!.data![index].accountNumber ??
+                            '27400000535107',
+                        price:
+                            activeAccountModel!.data![index].balance ?? '5.94',
+                        status:
+                            activeAccountModel!.data![index].status ?? 'نشط',
+                        onTap: () {
+                          goToWidget(screen:  AccountDetailsScreen(
+                            id: activeAccountModel!.data![index].id.toString()??'',
+                          ));
+                        },
+                      ),
+                      itemCount: activeAccountModel!.data!.length ?? 0,
+                    )
+                  : Center(
+                      child: Text(
+                        'لا يوجد حسابات نشطه في الوقت الحالي ',
+                        style: AppTextStyles.textStyle12
+                            .copyWith(color: AppColors.color514F4F),
+                      ),
+                    ),
+            ],
+            Padding(
+              padding: EdgeInsets.all(16.r),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'الحسابات الإخري',
+                    style: AppTextStyles.textStyle16.copyWith(
+                      color: AppColors.color514F4F,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                  SvgPicture.asset(AppImages.arrowUp)
+                ],
+              ),
             ),
+            Divider(
+              color: AppColors.color917F7F.withOpacity(.4),
+            ),
+            Padding(
+              padding: EdgeInsets.all(16.r),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'كشوف المرتبات',
+                    style: AppTextStyles.textStyle16.copyWith(
+                      color: AppColors.color514F4F,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                  SvgPicture.asset(AppImages.arrowUp)
+                ],
+              ),
+            ),
+            Divider(
+              color: AppColors.color917F7F.withOpacity(.4),
+            )
           ],
-          Padding(
-            padding: EdgeInsets.all(16.r),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'الحسابات الإخري',
-                  style: AppTextStyles.textStyle16.copyWith(
-                    color: AppColors.color514F4F,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-                SvgPicture.asset(AppImages.arrowUp)
-              ],
-            ),
-          ),
-          Divider(
-            color: AppColors.color917F7F.withOpacity(.4),
-          ),
-          Padding(
-            padding: EdgeInsets.all(16.r),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'كشوف المرتبات',
-                  style: AppTextStyles.textStyle16.copyWith(
-                    color: AppColors.color514F4F,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-                SvgPicture.asset(AppImages.arrowUp)
-              ],
-            ),
-          ),
-          Divider(
-            color: AppColors.color917F7F.withOpacity(.4),
-          )
-        ],
+        ),
       ),
     );
   }

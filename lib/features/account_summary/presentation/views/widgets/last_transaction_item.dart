@@ -7,6 +7,7 @@ import '../../../../../core/presentation/widgets/responsive_space.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_text_styles.dart';
 import '../../../../filter/presentation/views/pdf_screen.dart';
+import '../../../data/model/account_details_model.dart';
 
 
 class LastTransactionsItem extends StatelessWidget {
@@ -14,14 +15,14 @@ class LastTransactionsItem extends StatelessWidget {
     super.key, required this.transactionModel,
   });
 
-  final TransactionModel transactionModel;
+  final Transaction? transactionModel;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        goToWidget(screen:  PdfScreen(transactionModel: transactionModel,));
-      },
+      // onTap: (){
+      //   goToWidget(screen:  PdfScreen(transactionModel: transactionModel,));
+      // },
       child: Container(
         padding: EdgeInsets.all(16.r),
         decoration: BoxDecoration(
@@ -38,13 +39,16 @@ class LastTransactionsItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  transactionModel.operationName?? 'تحويل داخلي صادر',
+                  transactionModel?.details?? 'تحويل داخلي صادر',
                   overflow: TextOverflow.ellipsis,
                   style: AppTextStyles.textStyle12,
                 ),
                 verticalSpacer(4),
                 Text(
-                  transactionModel.time?? '2023-12-18',
+                ' ${
+                    transactionModel?.transactionDate?.year.toString() ?? '2023'}- ${
+                    transactionModel?.transactionDate?.month.toString() ?? '12'}-${
+                    transactionModel?.transactionDate?.day.toString() ?? '18'}',
                   overflow: TextOverflow.ellipsis,
                   style: AppTextStyles.textStyle10.copyWith(color: Colors.black),
                 ),
@@ -55,14 +59,14 @@ class LastTransactionsItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
-                    'SAR ${transactionModel.tax}',
+                    'SAR ${transactionModel?.printedValue}',
                     overflow: TextOverflow.ellipsis,
                     style: AppTextStyles.textStyle10
                         .copyWith(color: const Color(0xffE63637)),
                   ),
                   verticalSpacer(4),
                   Text(
-                    'SAR ${transactionModel.balance}',
+                    'SAR ${transactionModel?.balance}',
                     overflow: TextOverflow.ellipsis,
                     style: AppTextStyles.textStyle10.copyWith(color: Colors.black),
                   ),
