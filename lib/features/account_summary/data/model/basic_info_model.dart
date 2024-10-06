@@ -8,3 +8,16 @@ class BasicInfoModel{
     verifyCode=json['verifiy_code'];
   }
 }
+
+
+
+class AccountSetting{
+  String? accountId;
+  String? accountName;
+  String? verifyPhone;
+  AccountSetting.fromJson(Map<String,dynamic>json){
+    accountId=json['account_id'];
+    accountName=json['account_name'];
+    verifyPhone=json['verification_phone'];
+  }
+}

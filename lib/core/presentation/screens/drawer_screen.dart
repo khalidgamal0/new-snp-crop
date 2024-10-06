@@ -59,7 +59,7 @@ class DrawerScreen extends StatelessWidget {
                           verticalSpacer(8),
                           Text(
                             overflow: TextOverflow.ellipsis,
-                            '${basicInfoModel?.userName??'necr328351'} - ${basicInfoModel?.userNumber??'1010876749'}',
+                            '${accountSetting?.accountName??'necr328351'} - ${accountSetting?.accountId??'1010876749'}',
                             style: AppTextStyles.textStyle16,
                           ),
                           // Text(

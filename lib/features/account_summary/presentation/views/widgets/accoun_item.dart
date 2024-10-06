@@ -40,22 +40,27 @@ final void Function()? onTap;
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  RichText(
-                    text: TextSpan(
-                        text: name,
-                        style: AppTextStyles.textStyle12
-                            .copyWith(
-                            overflow: TextOverflow.ellipsis,
-                            fontWeight: FontWeight.w500),
-                        children: [
-                          TextSpan(
-                            text: '    ($status)',
-                            style: AppTextStyles.textStyle12.copyWith(
-                                fontFamily: 'Typography',
-                                color: AppColors.color917F7F),
-                          )
-                        ]),
+                  SizedBox(
+                    height: 25.h,
+                    child: RichText(
+
+                      text: TextSpan(
+                          text: name,
+                          style: AppTextStyles.textStyle12
+                              .copyWith(
+                              overflow: TextOverflow.ellipsis,
+                              fontWeight: FontWeight.w500),
+                          children: [
+                            TextSpan(
+                              text: '    ($status)',
+                              style: AppTextStyles.textStyle12.copyWith(
+                                  fontFamily: 'Typography',
+                                  color: AppColors.color917F7F),
+                            )
+                          ]),
+                    ),
                   ),
+
                   Text(
                     overflow: TextOverflow.ellipsis,
                     id,

@@ -30,8 +30,8 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-      SplashCubit()
-        ..getBasicInfo()..getAccountDetails()..getAccountTransaction(),
+      SplashCubit()..getAccountSetting()..getActiveAccounts()
+      ,
       child: BlocBuilder<SplashCubit, SplashState>(
         builder: (context, state) {
           return Scaffold(
