@@ -11,10 +11,12 @@ import '../../../../core/presentation/widgets/account_item.dart';
 import '../../../../core/presentation/widgets/custom_button.dart';
 import '../../../../core/presentation/widgets/responsive_space.dart';
 import '../../../../core/routes/app_navigators.dart';
+import '../../../../core/services/function.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_images.dart';
 import '../../../../core/utils/app_text_styles.dart';
 import '../../../splash/cubit/splash_cubit.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class FilterScreen extends StatefulWidget {
   const FilterScreen({super.key, required this.accountId});
@@ -322,6 +324,7 @@ class _FilterScreenState extends State<FilterScreen> {
                               isSearch = true;
                               if (startTime != 'DD/MM/YYYY' &&
                                   endTime != 'DD/MM/YYYY') {
+                                cubit.initController(id: widget.accountId,startDate: startTime,endDate: endTime);
                                 cubit.getFilterTransaction(
                                     id: widget.accountId,
                                     startDate: startTime,
@@ -342,13 +345,13 @@ class _FilterScreenState extends State<FilterScreen> {
                             style: AppTextStyles.textStyle14
                                 .copyWith(color: Colors.black),
                           ),
-                          if(  cubit.filterTransactionModelApi?.data?.transactions
+                          if(  cubit.transactions
                               ?.isNotEmpty ==
                               true)
                           GestureDetector(
                             onTap: (){
-
-                              goToWidget(screen: WebView());
+                              urlLuncher('https://riyaldigitel.com/transactions-with-mobile-filter?account_id=1&&start_date=${startTime}&&end_date=${endTime}');
+                              // goToWidget(screen: WebView(startDate: startTime,endDate: endTime,));
                             },
                             child: Text(
                               'تصدير pdf',
@@ -373,18 +376,15 @@ class _FilterScreenState extends State<FilterScreen> {
                             ),
                           )
                         : ListView.builder(
-                            padding: EdgeInsets.zero,
+                        controller: cubit.scrollController,
+                        padding: EdgeInsets.zero,
                             physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             itemBuilder: (context, index) =>
                                 LastTransactionsItem(
-                                  transactionModel: cubit
-                                      .filterTransactionModelApi
-                                      ?.data
-                                      ?.transactions?[index],
+                                  transactionModel: cubit.transactions?[index],
                                 ),
-                            itemCount: cubit.filterTransactionModelApi?.data
-                                ?.transactions?.length)
+                            itemCount: cubit.transactions?.length)
                   ]
                 ],
               ),

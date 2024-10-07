@@ -25,3 +25,10 @@ final class TransactionError extends SplashState {}
 final class TransactionDetailsLoading extends SplashState {}
 final class TransactionDetailsSuccess extends SplashState {}
 final class TransactionDetailsError extends SplashState {}
+final class AccountTransactionLoading extends SplashState {}
+final class AccountTransactionSuccess extends SplashState {}
+final class AccountTransactionError extends SplashState {}
+
+
+
+

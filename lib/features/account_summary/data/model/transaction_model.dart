@@ -40,7 +40,7 @@ class FilterTransactionModel {
 }
 
 class FilterTransactionModelData {
-  final List<Transaction>? transactions;
+    final List<Transaction>? transactions;
   final Pagination? pagination;
 
   FilterTransactionModelData({

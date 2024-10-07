@@ -32,7 +32,8 @@ dependencies:
   dio: ^5.3.2
   intl: ^0.19.0
   webview_flutter: ^4.9.0
-
+  flutter_media_downloader: ^1.0.6
+  url_launcher: ^6.1.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
