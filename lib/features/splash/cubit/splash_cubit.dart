@@ -156,11 +156,16 @@ class SplashCubit extends Cubit<SplashState> {
     });
   }
 
-  int currentPage = 1, totalItems = 0, perPage = 10, totalPages = 1;
+  bool withDate = false;
+  bool isSearch = false;
+  bool isLoading = false;
+  String startTime = 'DD/MM/YYYY';
+  String endTime = 'DD/MM/YYYY';
 
+  int currentPage = 1, totalItems = 0, perPage = 10, totalPages = 1;
   FilterTransactionModel ?filterTransactionModelApi;
   List<Transaction>? transactions;
-  Future<void>getFilterTransaction({required String id,required String startDate,required String endDate, int page=1,})async{
+  Future<void>getFilterTransaction({required String id,required String startDate,required String endDate,required int page,})async{
 
     if (page > totalPages) return;
     emit(TransactionLoading());
@@ -170,16 +175,30 @@ class SplashCubit extends Cubit<SplashState> {
       'end_date':endDate,
     }).then((value){
       filterTransactionModelApi=FilterTransactionModel.fromJson(value);
+      log('----------------------------------------------------');
       currentPage = filterTransactionModelApi?.data?.pagination?.currentPage ?? 1;
+
+      log(filterTransactionModelApi?.data?.pagination?.currentPage?.toString()??"");
+      log(currentPage.toString());
+      log(perPage.toString());
+      log(totalPages.toString());
+      log(totalItems.toString());
+
+log('----------------------------------------------------');
       totalItems = filterTransactionModelApi?.data?.pagination?.totalItems ?? 1;
       perPage =  filterTransactionModelApi?.data?.pagination?.perPage ?? 5;
       totalPages = filterTransactionModelApi?.data?.pagination?.totalPages ?? 1;
 
       if (page == 1) {
+        transactions?.clear();
         transactions=filterTransactionModelApi?.data?.transactions;
       }
       else{
         transactions?.addAll(filterTransactionModelApi?.data?.transactions??[]);
+        log('-----------------------------------------------------------------');
+        log(transactions?.length?.toString()??'');
+
+
       }
 
       emit(TransactionSuccess());
@@ -188,41 +207,61 @@ class SplashCubit extends Cubit<SplashState> {
       emit(TransactionError());
     });
   }
+  ScrollController scrollController = ScrollController();
 
-    ScrollController scrollController=ScrollController();
-  bool isLoading=false;
-  void onScroll({required String id,required String startDate,required String endDate, int page=1,}) async {
-    final maxScroll = scrollController.position.maxScrollExtent;
-    final currentScroll = scrollController.position.pixels;
-    if (currentScroll >= 0.7 * maxScroll) {
-      if (!isLoading) {
-        isLoading = true;
-        if (currentPage < totalPages) {
-          await getFilterTransaction(page: currentPage + 1,endDate:endDate,id: id,startDate: startDate );
-        }
-        isLoading = false;
+  void setupScrollController(String id) {
+    scrollController.addListener(() {
+      final maxScroll = scrollController.position.maxScrollExtent;
+      final currentScroll = scrollController.position.pixels;
+      if (currentScroll >= 0.7 * maxScroll) {
+        if (!isLoading) {
+          isLoading = true;
+          if (currentPage < totalPages) {
+            getFilterTransaction(
+              id:id , // Pass your actual values here
+              startDate: startTime,
+              endDate: endTime,
+              page:currentPage + 1,
+            );
+          }
+          isLoading = false;
       }
+      }
+
     }
+    );
   }
 
-  initController({
-    required String id,required String startDate,required String endDate,
-}){
-    scrollController.addListener(onScroll(id:'1', startDate: '2024-08-06', endDate: '2024-08-07'));
-  }
+//  static ScrollController scrollController=ScrollController();
+  // bool isLoading2=false;
+  // Future<void> onScroll({required String id,required String startDate,required String endDate, int page=1,}) async {
+  //   final maxScroll = scrollController.position.maxScrollExtent;
+  //   final currentScroll = scrollController.position.pixels;
+  //   if (currentScroll >= 0.7 * maxScroll) {
+  //     if (!isLoading2) {
+  //       isLoading2 = true;
+  //       if (currentPage < totalPages) {
+  //         await getFilterTransaction(page: currentPage + 1,endDate:endDate,id: id,startDate: startDate );
+  //       }
+  //       isLoading2 = false;
+  //     }
+  //   }
+  // }
+  //
 
 
-  TransactionDetailsModel ?transactionDetailsModel;
-  Future<void>getTransactionDetails({required String id,})async{
-    emit(TransactionDetailsLoading());
-    DioHelper.getData(endPoint:'transactions/$id/details', ).then((value){
-      transactionDetailsModel=TransactionDetailsModel.fromJson(value);
-      emit(TransactionDetailsSuccess());
-    }).catchError((error){
-      log(error.toString());
-      emit(TransactionDetailsError());
-    });
-  }
+
+  // TransactionDetailsModel ?transactionDetailsModel;
+  // Future<void>getTransactionDetails({required String id,})async{
+  //   emit(TransactionDetailsLoading());
+  //   DioHelper.getData(endPoint:'transactions/$id/details', ).then((value){
+  //     transactionDetailsModel=TransactionDetailsModel.fromJson(value);
+  //     emit(TransactionDetailsSuccess());
+  //   }).catchError((error){
+  //     log(error.toString());
+  //     emit(TransactionDetailsError());
+  //   });
+  // }
 
 
 

@@ -8,6 +8,7 @@ import '../../../../core/routes/app_navigators.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_images.dart';
 import '../../../../core/utils/app_text_styles.dart';
+import 'package:flutter_media_downloader/flutter_media_downloader.dart';
 
 class WebView extends StatefulWidget {
    const WebView({super.key, required this.startDate, required this.endDate,
@@ -21,6 +22,8 @@ class WebView extends StatefulWidget {
 
 class _WebViewState extends State<WebView> {
   late final controller ;
+  final _flutterMediaDownloaderPlugin = MediaDownload();
+
   @override
   void initState() {
     super.initState();
@@ -31,16 +34,19 @@ class _WebViewState extends State<WebView> {
       NavigationDelegate(
         onProgress: (int progress) {
           // Update loading bar.
+          setState(() {
+
+          });
         },
-        onPageStarted: (String url) {},
-      //   onPageFinished: (String url) {
-      //     showDialog(context: context, builder: (context) =>  AlertDialog(title: GestureDetector(
-      //         onTap: (){
-      //           goBack();
-      //         },
-      //         child: const Text('تم التحميل بنجاح',textAlign: TextAlign.center,)),),);
-      //   },
-      //
+        onPageStarted: (String url) {
+          setState(() {
+
+          });
+        },
+        onPageFinished: (String url)async {
+          _flutterMediaDownloaderPlugin.downloadMedia(context,'https://riyaldigitel.com/transactions-with-mobile-filter?account_id=1&&start_date=${widget.startDate}&&end_date=${widget.endDate}');
+        },
+
       ),
     )
 

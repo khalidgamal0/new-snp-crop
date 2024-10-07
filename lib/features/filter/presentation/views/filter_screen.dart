@@ -28,12 +28,6 @@ class FilterScreen extends StatefulWidget {
 }
 
 class _FilterScreenState extends State<FilterScreen> {
-  bool withDate = false;
-  bool isSearch = false;
-  bool isLoading = false;
-  String startTime = 'DD/MM/YYYY';
-  String endTime = 'DD/MM/YYYY';
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -64,6 +58,7 @@ class _FilterScreenState extends State<FilterScreen> {
           builder: (context, state) {
             var cubit = SplashCubit.get(context);
             return SingleChildScrollView(
+              controller: cubit.scrollController,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -90,14 +85,14 @@ class _FilterScreenState extends State<FilterScreen> {
                         Expanded(
                           child: GestureDetector(
                             onTap: () {
-                              withDate = false;
+                              cubit.withDate = false;
                               setState(() {});
                             },
                             child: Container(
                               height: 32,
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
-                                  color: withDate
+                                  color: cubit.withDate
                                       ? Colors.white
                                       : AppColors.secondary,
                                   border: Border(
@@ -116,8 +111,9 @@ class _FilterScreenState extends State<FilterScreen> {
                                 'بالفترة',
                                 style: AppTextStyles.textStyle14.copyWith(
                                     fontWeight: FontWeight.w400,
-                                    color:
-                                        withDate ? Colors.black : Colors.white),
+                                    color: cubit.withDate
+                                        ? Colors.black
+                                        : Colors.white),
                               ),
                             ),
                           ),
@@ -125,14 +121,14 @@ class _FilterScreenState extends State<FilterScreen> {
                         Expanded(
                           child: GestureDetector(
                             onTap: () {
-                              withDate = true;
+                              cubit.withDate = true;
                               setState(() {});
                             },
                             child: Container(
                               height: 32,
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
-                                  color: withDate
+                                  color: cubit.withDate
                                       ? AppColors.secondary
                                       : Colors.white,
                                   border: Border(
@@ -151,7 +147,9 @@ class _FilterScreenState extends State<FilterScreen> {
                                 'بالتاريخ',
                                 style: AppTextStyles.textStyle14.copyWith(
                                   fontWeight: FontWeight.w400,
-                                  color: withDate ? Colors.white : Colors.black,
+                                  color: cubit.withDate
+                                      ? Colors.white
+                                      : Colors.black,
                                 ),
                               ),
                             ),
@@ -163,10 +161,10 @@ class _FilterScreenState extends State<FilterScreen> {
                   verticalSpacer(24),
                   TapBarChildItem(
                     withIcon: true,
-                    haveBottomBorder: withDate ? true : false,
+                    haveBottomBorder: cubit.withDate ? true : false,
                     name: 'وقت التنفيذ',
                   ),
-                  withDate
+                  cubit.withDate
                       ? Container(
                           height: 56.h,
                           alignment: Alignment.center,
@@ -184,8 +182,9 @@ class _FilterScreenState extends State<FilterScreen> {
                                 onTap: () {
                                   showDatePicker(context,
                                       onDateTimeChanged: (date) {
-                                        final DateFormat formatter = DateFormat('yyyy-MM-dd');
-                                        startTime = formatter.format(date);
+                                    final DateFormat formatter =
+                                        DateFormat('yyyy-MM-dd');
+                                    cubit.startTime = formatter.format(date);
 
                                     setState(() {});
                                   });
@@ -201,7 +200,7 @@ class _FilterScreenState extends State<FilterScreen> {
                                     ),
                                     horizontalSpacer(56),
                                     Text(
-                                      startTime,
+                                      cubit.startTime,
                                       style: AppTextStyles.textStyle12.copyWith(
                                         color: AppColors.color917F7F,
                                       ),
@@ -218,8 +217,9 @@ class _FilterScreenState extends State<FilterScreen> {
                                 onTap: () {
                                   showDatePicker(context,
                                       onDateTimeChanged: (date) {
-                                        final DateFormat formatter = DateFormat('yyyy-MM-dd');
-                                        endTime = formatter.format(date);
+                                    final DateFormat formatter =
+                                        DateFormat('yyyy-MM-dd');
+                                    cubit.endTime = formatter.format(date);
                                     setState(() {});
                                   });
                                 },
@@ -234,7 +234,7 @@ class _FilterScreenState extends State<FilterScreen> {
                                     ),
                                     horizontalSpacer(48),
                                     Text(
-                                      endTime,
+                                      cubit.endTime,
                                       style: AppTextStyles.textStyle12.copyWith(
                                         color: AppColors.color917F7F,
                                       ),
@@ -321,22 +321,24 @@ class _FilterScreenState extends State<FilterScreen> {
                         : CustomButton(
                             buttonName: 'بحث',
                             onTap: () {
-                              isSearch = true;
-                              if (startTime != 'DD/MM/YYYY' &&
-                                  endTime != 'DD/MM/YYYY') {
-                                cubit.initController(id: widget.accountId,startDate: startTime,endDate: endTime);
+                              cubit.isSearch = true;
+                              if (cubit.startTime != 'DD/MM/YYYY' &&
+                                  cubit.endTime != 'DD/MM/YYYY') {
+                                cubit.setupScrollController(widget.accountId);
                                 cubit.getFilterTransaction(
+                                  page: cubit.currentPage,
                                     id: widget.accountId,
-                                    startDate: startTime,
-                                    endDate: endTime);
+                                    startDate: cubit.startTime,
+                                    endDate: cubit.endTime);
                               }
                             },
                           ),
                   ),
                   verticalSpacer(24),
-                  if (isSearch && withDate) ...[
+                  if (cubit.isSearch && cubit.withDate) ...[
                     Padding(
-                      padding: EdgeInsets.only(right: 16.w, bottom: 16.h,left: 16.w),
+                      padding: EdgeInsets.only(
+                          right: 16.w, bottom: 16.h, left: 16.w),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -345,20 +347,21 @@ class _FilterScreenState extends State<FilterScreen> {
                             style: AppTextStyles.textStyle14
                                 .copyWith(color: Colors.black),
                           ),
-                          if(  cubit.transactions
-                              ?.isNotEmpty ==
-                              true)
-                          GestureDetector(
-                            onTap: (){
-                              urlLuncher('https://riyaldigitel.com/transactions-with-mobile-filter?account_id=1&&start_date=${startTime}&&end_date=${endTime}');
-                              // goToWidget(screen: WebView(startDate: startTime,endDate: endTime,));
-                            },
-                            child: Text(
-                              'تصدير pdf',
-                              style: AppTextStyles.textStyle14
-                                  .copyWith(color: Colors.black),
+                          if (cubit.transactions?.isNotEmpty == true)
+                            GestureDetector(
+                              onTap: () {
+                                // urlLuncher(
+                                //     'https://riyaldigitel.com/transactions-with-mobile-filter?account_id=1&&start_date=${cubit.startTime}&&end_date=${cubit.endTime}');
+                                //
+
+                                goToWidget(screen: WebView(startDate: cubit.startTime,endDate: cubit.endTime,));
+                              },
+                              child: Text(
+                                'تصدير pdf',
+                                style: AppTextStyles.textStyle14
+                                    .copyWith(color: Colors.black),
+                              ),
                             ),
-                          ),
                         ],
                       ),
                     ),
@@ -376,8 +379,7 @@ class _FilterScreenState extends State<FilterScreen> {
                             ),
                           )
                         : ListView.builder(
-                        controller: cubit.scrollController,
-                        padding: EdgeInsets.zero,
+                            padding: EdgeInsets.zero,
                             physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             itemBuilder: (context, index) =>
