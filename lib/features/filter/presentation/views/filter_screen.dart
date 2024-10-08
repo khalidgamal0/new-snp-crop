@@ -324,6 +324,9 @@ class _FilterScreenState extends State<FilterScreen> {
                               cubit.isSearch = true;
                               if (cubit.startTime != 'DD/MM/YYYY' &&
                                   cubit.endTime != 'DD/MM/YYYY') {
+                                cubit. currentPage = 1; cubit. totalItems = 0; cubit. perPage = 10; cubit. totalPages = 1;
+                                cubit.transactions?.clear();
+
                                 cubit.setupScrollController(widget.accountId);
                                 cubit.getFilterTransaction(
                                   page: cubit.currentPage,
@@ -350,6 +353,7 @@ class _FilterScreenState extends State<FilterScreen> {
                           if (cubit.transactions?.isNotEmpty == true)
                             GestureDetector(
                               onTap: () {
+
                                 // urlLuncher(
                                 //     'https://riyaldigitel.com/transactions-with-mobile-filter?account_id=1&&start_date=${cubit.startTime}&&end_date=${cubit.endTime}');
                                 //

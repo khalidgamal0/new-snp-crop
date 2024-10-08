@@ -77,7 +77,9 @@ class _WebViewState extends State<WebView> {
            horizontalSpacer(20)
          ],
        ),
-       body: WebViewWidget(controller: controller),
+       body: WebViewWidget(
+
+           controller: controller),
      );
    }
 }

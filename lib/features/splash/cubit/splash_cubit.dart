@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:artificial_intelligence/features/account_summary/data/model/active_accounts_model.dart';
@@ -159,77 +160,71 @@ class SplashCubit extends Cubit<SplashState> {
   bool withDate = false;
   bool isSearch = false;
   bool isLoading = false;
+  bool isLoading2 = false;
   String startTime = 'DD/MM/YYYY';
   String endTime = 'DD/MM/YYYY';
 
   int currentPage = 1, totalItems = 0, perPage = 10, totalPages = 1;
   FilterTransactionModel ?filterTransactionModelApi;
   List<Transaction>? transactions;
-  Future<void>getFilterTransaction({required String id,required String startDate,required String endDate,required int page,})async{
 
+  Future<void> getFilterTransaction({required String id, required String startDate, required String endDate, required int page}) async {
     if (page > totalPages) return;
     emit(TransactionLoading());
-    await DioHelper.postData(endPoint:'transactions/filtered-transactions?page=$page', data: {
-      'account_id':id,
-      'start_date':startDate,
-      'end_date':endDate,
-    }).then((value){
-      filterTransactionModelApi=FilterTransactionModel.fromJson(value);
-      log('----------------------------------------------------');
+    isLoading2 = true; // Set to true before the request
+    await DioHelper.postData(endPoint: 'transactions/filtered-transactions?page=$page', data: {
+      'account_id': id,
+      'start_date': startDate,
+      'end_date': endDate,
+    }).then((value) {
+      filterTransactionModelApi = FilterTransactionModel.fromJson(value);
       currentPage = filterTransactionModelApi?.data?.pagination?.currentPage ?? 1;
-
-      log(filterTransactionModelApi?.data?.pagination?.currentPage?.toString()??"");
-      log(currentPage.toString());
-      log(perPage.toString());
-      log(totalPages.toString());
-      log(totalItems.toString());
-
-log('----------------------------------------------------');
       totalItems = filterTransactionModelApi?.data?.pagination?.totalItems ?? 1;
-      perPage =  filterTransactionModelApi?.data?.pagination?.perPage ?? 5;
+      perPage = filterTransactionModelApi?.data?.pagination?.perPage ?? 5;
       totalPages = filterTransactionModelApi?.data?.pagination?.totalPages ?? 1;
 
       if (page == 1) {
         transactions?.clear();
-        transactions=filterTransactionModelApi?.data?.transactions;
-      }
-      else{
-        transactions?.addAll(filterTransactionModelApi?.data?.transactions??[]);
-        log('-----------------------------------------------------------------');
-        log(transactions?.length?.toString()??'');
-
-
+        transactions = filterTransactionModelApi?.data?.transactions;
+      } else {
+        transactions?.addAll(filterTransactionModelApi?.data?.transactions ?? []);
       }
 
       emit(TransactionSuccess());
-    }).catchError((error){
+      isLoading2 = false; // Set to false after success
+    }).catchError((error) {
       log(error.toString());
       emit(TransactionError());
+      isLoading2 = false; // Ensure it's reset even after an error
     });
   }
   ScrollController scrollController = ScrollController();
+
+  Timer? _debounce;
 
   void setupScrollController(String id) {
     scrollController.addListener(() {
       final maxScroll = scrollController.position.maxScrollExtent;
       final currentScroll = scrollController.position.pixels;
-      if (currentScroll >= 0.7 * maxScroll) {
-        if (!isLoading) {
-          isLoading = true;
-          if (currentPage < totalPages) {
-            getFilterTransaction(
-              id:id , // Pass your actual values here
-              startDate: startTime,
-              endDate: endTime,
-              page:currentPage + 1,
-            );
-          }
-          isLoading = false;
-      }
-      }
 
-    }
-    );
+      if (_debounce?.isActive ?? false) _debounce?.cancel();
+      _debounce = Timer(const Duration(milliseconds: 300), () {
+        if (currentScroll >= 0.7 * maxScroll) {
+          if (!isLoading2) {
+            isLoading2 = true;
+            if (currentPage < totalPages) {
+              getFilterTransaction(
+                id: id,
+                startDate: startTime,
+                endDate: endTime,
+                page: currentPage + 1,
+              );
+            }
+            isLoading2 = false;
+          }
+        }
+      });
+    });
   }
 
 //  static ScrollController scrollController=ScrollController();
