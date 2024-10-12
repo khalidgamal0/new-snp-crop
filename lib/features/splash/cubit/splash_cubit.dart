@@ -6,6 +6,7 @@ import 'package:artificial_intelligence/features/account_summary/data/model/basi
 import 'package:flutter/material.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../../../core/services/dio.dart';
 import '../../account_summary/data/model/account_details_model.dart';
@@ -122,6 +123,64 @@ class SplashCubit extends Cubit<SplashState> {
   // }
 
 //api
+
+
+  Future<void> requestStoragePermission(BuildContext context) async {
+    var status = await Permission.storage.status;
+
+    if (status.isDenied) {
+      // If permission was previously denied, request it again
+      status = await Permission.storage.request();
+    }
+
+    // After requesting, check the status again
+    if (status.isGranted) {
+      // Show SnackBar when permission is granted
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Storage permission granted! Downloading PDF..."),
+          backgroundColor: Colors.green,
+        ),
+      );
+    } else if (status.isDenied) {
+      // Show SnackBar when permission is denied by the user
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Storage permission denied by user."),
+          backgroundColor: Colors.red,
+        ),
+      );
+    } else if (status.isPermanentlyDenied) {
+      // If permission is permanently denied, open app settings
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text("Permission Required"),
+              content: Text(
+                  "Storage permission is permanently denied. Please enable it from settings."
+              ),
+              actions: <Widget>[
+                TextButton(
+                  child: Text("Open Settings"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    openAppSettings();  // Open the app settings
+                  },
+                ),
+                TextButton(
+                  child: Text("Cancel"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+          );
+    }
+    }
+
 
   Future<void>getAccountSetting()async{
     emit(BasicInfoLoading());

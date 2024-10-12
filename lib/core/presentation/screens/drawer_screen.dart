@@ -76,7 +76,7 @@ class DrawerScreen extends StatelessWidget {
                 ],
               ),
               Container(
-                height: 70.h,
+
                 alignment: Alignment.center,
                 padding: EdgeInsets.all(12.r),
                 color: const Color(0xffEEEDE9),

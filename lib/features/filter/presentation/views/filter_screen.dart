@@ -1,12 +1,16 @@
+import 'dart:developer';
+
 import 'package:artificial_intelligence/features/account_summary/presentation/views/widgets/last_transaction_item.dart';
 import 'package:artificial_intelligence/features/filter/presentation/views/web_view.dart';
 import 'package:artificial_intelligence/features/filter/presentation/views/widgets/tap_bar_child_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_media_downloader/flutter_media_downloader.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
+import 'package:permission_handler/permission_handler.dart';
 import '../../../../core/presentation/widgets/account_item.dart';
 import '../../../../core/presentation/widgets/custom_button.dart';
 import '../../../../core/presentation/widgets/responsive_space.dart';
@@ -28,6 +32,8 @@ class FilterScreen extends StatefulWidget {
 }
 
 class _FilterScreenState extends State<FilterScreen> {
+  final _flutterMediaDownloaderPlugin = MediaDownload();
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -353,12 +359,14 @@ class _FilterScreenState extends State<FilterScreen> {
                           if (cubit.transactions?.isNotEmpty == true)
                             GestureDetector(
                               onTap: () {
-
+                                //
                                 // urlLuncher(
                                 //     'https://riyaldigitel.com/transactions-with-mobile-filter?account_id=1&&start_date=${cubit.startTime}&&end_date=${cubit.endTime}');
                                 //
 
-                                goToWidget(screen: WebView(startDate: cubit.startTime,endDate: cubit.endTime,));
+                                goToWidget(screen: WebViewWithDownload(initialUrl: 'https://riyaldigitel.com/transactions-with-mobile-filter?account_id=1&&start_date=${cubit.startTime}&&end_date=${cubit.endTime}',));
+                                // _flutterMediaDownloaderPlugin.downloadMedia(context,'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf');
+
                               },
                               child: Text(
                                 'تصدير pdf',
