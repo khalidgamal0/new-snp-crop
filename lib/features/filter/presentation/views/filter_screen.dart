@@ -364,7 +364,7 @@ class _FilterScreenState extends State<FilterScreen> {
                                 //     'https://riyaldigitel.com/transactions-with-mobile-filter?account_id=1&&start_date=${cubit.startTime}&&end_date=${cubit.endTime}');
                                 //
 
-                                goToWidget(screen: WebViewWithDownload(initialUrl: 'https://riyaldigitel.com/transactions-with-mobile-filter?account_id=1&&start_date=${cubit.startTime}&&end_date=${cubit.endTime}',));
+                                goToWidget(screen: WebViewWithDownload(startDate: cubit.startTime,endDate: cubit.endTime,));
                                 // _flutterMediaDownloaderPlugin.downloadMedia(context,'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf');
 
                               },

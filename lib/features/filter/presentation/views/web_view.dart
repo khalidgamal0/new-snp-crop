@@ -14,9 +14,10 @@ import '../../../../core/utils/app_images.dart';
 import '../../../../core/utils/app_text_styles.dart';
 
 class WebViewWithDownload extends StatefulWidget {
-  final String initialUrl;
+  const WebViewWithDownload({super.key, required this.startDate, required this.endDate});
 
-  const WebViewWithDownload({Key? key, required this.initialUrl}) : super(key: key);
+  final String startDate,endDate;
+
 
   @override
   _WebViewWithDownloadState createState() => _WebViewWithDownloadState();
@@ -40,7 +41,7 @@ class _WebViewWithDownloadState extends State<WebViewWithDownload> {
     try {
       // Get the file path to save the PDF
       final directory = await getExternalStorageDirectory();
-      final filePath = '${directory?.path}/${url.split('/').last}';
+      final filePath = '${directory?.path}/${url.split('/').last}.pdf';
 
       // Download the file
       final response = await http.get(Uri.parse(url));
@@ -60,6 +61,8 @@ class _WebViewWithDownloadState extends State<WebViewWithDownload> {
     }
   }
 
+
+
   Future<void> _downloadBlob(String base64Data, String fileName) async {
     // Request storage permission
     var status = await Permission.storage.request();
@@ -68,23 +71,38 @@ class _WebViewWithDownloadState extends State<WebViewWithDownload> {
     }
 
     try {
-      // Get the directory to save the file
-      final directory = await getExternalStorageDirectory();
-      final filePath = '${directory?.path}/$fileName';
+      // Get the Downloads directory for Android manually
+      final directoryPath = "/storage/emulated/0/Download/";
+      Directory? directory = Directory(directoryPath);
+
+      if (!directory.existsSync()) {
+        directory=await getExternalStorageDirectory();
+      }
+
+      // Create the file path with a .pdf extension
+      final filePath = '${directory?.path}from ${widget.startDate} To ${widget.endDate}.pdf';
 
       // Decode the base64 string and write it to a file
       final bytes = base64Decode(base64Data);
       final file = File(filePath);
       await file.writeAsBytes(bytes);
 
-      // Notify user of success
+      // Notify the user of success
       ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Downloaded to $filePath'),
-            backgroundColor: Colors.green,duration: Duration(seconds: 3),));
+        SnackBar(
+          content: Text('Downloaded to $filePath'),
+          backgroundColor: Colors.green,
+          duration: const Duration(seconds: 10),
+        ),
+      );
     } catch (e) {
-      // Handle errors
+      // Handle errors and notify the user
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to download blob: $e')),
+        SnackBar(
+          content: Text('Failed to download blob: $e'),
+          backgroundColor: Colors.red,
+          duration: const Duration(seconds: 3),
+        ),
       );
     }
   }
@@ -113,7 +131,7 @@ class _WebViewWithDownloadState extends State<WebViewWithDownload> {
         ],
       ),
       body: WebView(
-        initialUrl: widget.initialUrl,
+        initialUrl: 'https://riyaldigitel.com/transactions-with-mobile-filter?account_id=1&&start_date=${widget.startDate}&&end_date=${widget.endDate}',
         javascriptMode: JavascriptMode.unrestricted,
         onWebViewCreated: (controller) {
           _controller = controller;
