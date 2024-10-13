@@ -23,16 +23,16 @@ import '../../../splash/cubit/splash_cubit.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class FilterScreen extends StatefulWidget {
-  const FilterScreen({super.key, required this.accountId});
+  const FilterScreen({super.key, required this.accountId, required this.name, required this.number, required this.balance});
 
   final String accountId;
+  final String name,number,balance;
 
   @override
   State<FilterScreen> createState() => _FilterScreenState();
 }
 
 class _FilterScreenState extends State<FilterScreen> {
-  final _flutterMediaDownloaderPlugin = MediaDownload();
 
   @override
   Widget build(BuildContext context) {
@@ -79,9 +79,9 @@ class _FilterScreenState extends State<FilterScreen> {
                   ),
                   verticalSpacer(24),
                   AccountItem(
-                    name: accountDetailsModel?.status ?? 'نشط',
-                    id: accountDetailsModel?.accountNumber ?? '27400000535107',
-                    balance: accountDetailsModel?.outerBalance ?? '5.94',
+                    name: widget.name,
+                    id: widget.number ,
+                    balance:widget.balance ,
                   ),
                   verticalSpacer(24),
                   Padding(

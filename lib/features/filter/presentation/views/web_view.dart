@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:convert';
 // To decode base64
 import 'package:flutter/material.dart';
+import 'package:open_file/open_file.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:path_provider/path_provider.dart';
@@ -92,9 +93,12 @@ class _WebViewWithDownloadState extends State<WebViewWithDownload> {
         SnackBar(
           content: Text('Downloaded to $filePath'),
           backgroundColor: Colors.green,
-          duration: const Duration(seconds: 10),
+          duration: const Duration(seconds: 3),
         ),
+
       );
+      await OpenFile.open(filePath);
+
     } catch (e) {
       // Handle errors and notify the user
       ScaffoldMessenger.of(context).showSnackBar(
