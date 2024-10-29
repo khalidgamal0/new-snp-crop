@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 class DioHelper {
   static Dio dio= Dio(
     BaseOptions(
-        baseUrl: 'https://riyaldigitel.com/api/',
+        baseUrl: 'https://erpacounting.com/api/',
         receiveDataWhenStatusError: true,
         headers:{
           'Content-Type': 'application/json',
