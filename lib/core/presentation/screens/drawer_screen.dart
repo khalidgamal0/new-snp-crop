@@ -24,6 +24,7 @@ class DrawerScreen extends StatelessWidget {
           child: Column(
             children: [
               Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
                     color: Colors.black.withOpacity(.4),
@@ -48,8 +49,8 @@ class DrawerScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          Image.asset(AppImages.snpLogo),
-                          verticalSpacer(9),
+                          // Image.asset(AppImages.snpLogo),
+                          verticalSpacer(10),
                           Text(
                             'مرحبًا بعودتك',
                             overflow: TextOverflow.ellipsis,

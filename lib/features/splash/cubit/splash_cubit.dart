@@ -137,7 +137,7 @@ class SplashCubit extends Cubit<SplashState> {
     if (status.isGranted) {
       // Show SnackBar when permission is granted
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text("Storage permission granted! Downloading PDF..."),
           backgroundColor: Colors.green,
         ),
@@ -145,7 +145,7 @@ class SplashCubit extends Cubit<SplashState> {
     } else if (status.isDenied) {
       // Show SnackBar when permission is denied by the user
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text("Storage permission denied by user."),
           backgroundColor: Colors.red,
         ),
@@ -156,20 +156,20 @@ class SplashCubit extends Cubit<SplashState> {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text("Permission Required"),
-              content: Text(
+              title: const Text("Permission Required"),
+              content: const Text(
                   "Storage permission is permanently denied. Please enable it from settings."
               ),
               actions: <Widget>[
                 TextButton(
-                  child: Text("Open Settings"),
+                  child: const Text("Open Settings"),
                   onPressed: () {
                     Navigator.of(context).pop();
                     openAppSettings();  // Open the app settings
                   },
                 ),
                 TextButton(
-                  child: Text("Cancel"),
+                  child: const Text("Cancel"),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },

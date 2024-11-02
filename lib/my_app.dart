@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'core/helper/lang.dart';
 import 'core/utils/app_theme.dart';
 import 'core/utils/app_words.dart';
+import 'features/auth/views/login_screen.dart';
 import 'features/splash/splash_screen.dart';
 
 class MyApp extends StatelessWidget {
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: AppWords.appName.name,
         theme: appLightTheme(),
-        home: const SplashScreen(),
+        home:  LoginScreen(),
         // routes: appRoutes(context),
       ),
     );
