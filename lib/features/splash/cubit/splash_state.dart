@@ -28,6 +28,9 @@ final class TransactionDetailsError extends SplashState {}
 final class AccountTransactionLoading extends SplashState {}
 final class AccountTransactionSuccess extends SplashState {}
 final class AccountTransactionError extends SplashState {}
+final class XlsxLoading extends SplashState {}
+final class XlsxSuccess extends SplashState {}
+final class XlsxError extends SplashState {}
 
 
 

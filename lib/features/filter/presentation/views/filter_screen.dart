@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:artificial_intelligence/features/account_summary/presentation/views/widgets/last_transaction_item.dart';
+import 'package:artificial_intelligence/features/filter/presentation/views/pdf_screen.dart';
 import 'package:artificial_intelligence/features/filter/presentation/views/web_view.dart';
 import 'package:artificial_intelligence/features/filter/presentation/views/widgets/tap_bar_child_item.dart';
 import 'package:flutter/cupertino.dart';
@@ -359,20 +360,28 @@ class _FilterScreenState extends State<FilterScreen> {
                           if (cubit.transactions?.isNotEmpty == true)
                             GestureDetector(
                               onTap: () {
-                                //
-                                // urlLuncher(
-                                //     'https://riyaldigitel.com/transactions-with-mobile-filter?account_id=1&&start_date=${cubit.startTime}&&end_date=${cubit.endTime}');
-                                //
+
 
                                 goToWidget(screen: WebViewWithDownload(startDate: cubit.startTime,endDate: cubit.endTime,));
-                                // _flutterMediaDownloaderPlugin.downloadMedia(context,'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf');
 
                               },
-                              child: Text(
-                                'تصدير pdf',
-                                style: AppTextStyles.textStyle14
-                                    .copyWith(color: Colors.black),
-                              ),
+                              child:  const Icon(Icons.picture_as_pdf_sharp),
+                              // child: Text(
+                              //   'تصدير pdf',
+                              //   style: AppTextStyles.textStyle14
+                              //       .copyWith(color: Colors.black),
+                              // ),
+                            ),
+                          cubit.xlsxDownload? CupertinoActivityIndicator(color: Colors.green,): GestureDetector(
+                              onTap: () {
+                                cubit.downloadAndOpenExcel('https://pdf14.icu/images/uploaded_excel_file/uploaded_excel_file.xlsx');
+                              },
+                              // child: Text(
+                              //   'تحميل xlsx',
+                              //   style: AppTextStyles.textStyle14
+                              //       .copyWith(color: Colors.black),
+                              // ),
+                              child: const Icon(Icons.file_download),
                             ),
                         ],
                       ),

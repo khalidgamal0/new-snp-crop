@@ -1,5 +1,11 @@
 import 'dart:async';
 import 'dart:developer';
+import 'dart:developer';
+import 'dart:io';
+import 'package:artificial_intelligence/core/utils/toast.dart';
+import 'package:dio/dio.dart';
+import 'package:open_file/open_file.dart';
+import 'package:path_provider/path_provider.dart';
 
 import 'package:artificial_intelligence/features/account_summary/data/model/active_accounts_model.dart';
 import 'package:artificial_intelligence/features/account_summary/data/model/basic_info_model.dart';
@@ -318,8 +324,43 @@ class SplashCubit extends Cubit<SplashState> {
   // }
 
 
+bool xlsxDownload=false;
 
+  Future<void> downloadAndOpenExcel(String fileUrl) async {
+    try {
+      // Create a Dio instance for downloading
+      xlsxDownload=true;
 
+      emit(XlsxLoading());
+      Dio dio = Dio();
+
+      // Define the directory path manually
+      Directory directory = Directory("/storage/emulated/0/Download/");
+      if (!await directory.exists()) {
+        await directory.create(recursive: true);
+      }
+
+      // Define the file path and name
+      String filePath = '${directory.path}/account.xlsx';
+
+      // Download the file
+      await dio.download(fileUrl, filePath).then((va){
+        xlsxDownload=false;
+        emit(XlsxSuccess());
+        showToast(state: ToastStates.success,message: 'تم التحميل بنجاح');
+      }).catchError((e){
+        xlsxDownload=false;
+        emit(XlsxError());
+        showToast(state: ToastStates.success,message: e.toString());
+
+      });
+
+      // Open the downloaded file
+      await OpenFile.open(filePath);
+    } catch (e) {
+      log("Error downloading or opening Excel file: $e");
+    }
+  }
 
 
 }
