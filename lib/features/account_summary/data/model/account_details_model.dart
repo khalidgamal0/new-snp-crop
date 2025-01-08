@@ -55,6 +55,8 @@ class AccountDetailsModelApi {
 
 class AccountDetailsModelApiData {
   final int? id;
+  String? excelUrl;
+
   final String? accountNumber;
   final String? status;
   final String? accountName;
@@ -70,6 +72,7 @@ class AccountDetailsModelApiData {
 
   AccountDetailsModelApiData({
     this.id,
+    this.excelUrl,
     this.accountNumber,
     this.status,
     this.accountName,
@@ -86,6 +89,7 @@ class AccountDetailsModelApiData {
 
   factory AccountDetailsModelApiData.fromJson(Map<String, dynamic> json) => AccountDetailsModelApiData(
     id: json["id"],
+    excelUrl: json["excel_url"],
     accountNumber: json["account_number"],
     status: json["status"],
     accountName: json["account_name"],

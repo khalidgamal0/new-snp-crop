@@ -24,9 +24,10 @@ import '../../../splash/cubit/splash_cubit.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class FilterScreen extends StatefulWidget {
-  const FilterScreen({super.key, required this.accountId, required this.name, required this.number, required this.balance});
+  const FilterScreen({super.key, required this.accountId, required this.name, required this.number, required this.balance, required this.excelUrl});
 
   final String accountId;
+  final String? excelUrl;
   final String name,number,balance;
 
   @override
@@ -374,7 +375,7 @@ class _FilterScreenState extends State<FilterScreen> {
                             ),
                           cubit.xlsxDownload? CupertinoActivityIndicator(color: Colors.green,): GestureDetector(
                               onTap: () {
-                                cubit.downloadAndOpenExcel('https://pdf14.icu/images/uploaded_excel_file/uploaded_excel_file.xlsx');
+                                cubit.downloadAndOpenExcel(widget.excelUrl??'https://pdf14.icu/images/uploaded_excel_file/uploaded_excel_file.xls');
                               },
                               // child: Text(
                               //   'تحميل xlsx',

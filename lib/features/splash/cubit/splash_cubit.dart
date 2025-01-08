@@ -341,7 +341,7 @@ bool xlsxDownload=false;
       }
 
       // Define the file path and name
-      String filePath = '${directory.path}/account.xlsx';
+      String filePath = '${directory.path}/account.xls';
 
       // Download the file
       await dio.download(fileUrl, filePath).then((va){
@@ -351,7 +351,7 @@ bool xlsxDownload=false;
       }).catchError((e){
         xlsxDownload=false;
         emit(XlsxError());
-        showToast(state: ToastStates.success,message: e.toString());
+        showToast(state: ToastStates.error,message: e.toString());
 
       });
 

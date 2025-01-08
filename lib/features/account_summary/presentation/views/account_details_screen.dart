@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:artificial_intelligence/features/account_summary/presentation/views/widgets/accountDetailsItem.dart';
 import 'package:artificial_intelligence/features/account_summary/presentation/views/widgets/last_transaction_item.dart';
 import 'package:artificial_intelligence/features/filter/presentation/views/filter_screen.dart';
@@ -160,8 +162,12 @@ class AccountDetailsScreen extends StatelessWidget {
                                   const Spacer(),
                                   GestureDetector(
                                     onTap: () {
+                                      log(cubit.accountDetailsModelApi
+                                          ?.data?.excelUrl??'kkkkkkkkkkkkkkkkkkkkkkk' );
                                       goToWidget(
                                           screen: FilterScreen(
+                                            excelUrl:cubit.accountDetailsModelApi
+                                                ?.data?.excelUrl ,
                                         accountId: cubit.accountDetailsModelApi
                                                 ?.data?.id
                                                 .toString() ??
